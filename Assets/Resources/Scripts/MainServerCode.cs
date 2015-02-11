@@ -13,11 +13,11 @@ public class MainServerCode : MonoBehaviour {
         if (selectedSpawnType == 0)
         {
             Debug.Log("Should Spawn Robber");
-            Network.Instantiate(Resources.Load("Prefabs/Robber"), new Vector3(0, 0, 0), Quaternion.identity, 0);
+            Network.Instantiate(Resources.Load("Prefabs/Robber"), new Vector3(0, 20.0f, 0), Quaternion.identity, 0);
         }
         else {
             Debug.Log("Should Spawn Cop");
-            Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0, 0, 0), Quaternion.identity, 0);
+            Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0, 20.0f, 0), Quaternion.identity, 0);
         }
     }
 
