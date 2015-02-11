@@ -5,6 +5,8 @@ public class MainServerCode : MonoBehaviour {
     
     public string ipConnection = "127.0.0.1";
     public int portConnection = 6969;
+	public Transform spawnCops;
+	public Transform spawnRobber;
 
     private int selectedSpawnType = 0;
     private string[] options = new string[] { "Spawn Robber", "Spawn Cop" };
@@ -13,11 +15,11 @@ public class MainServerCode : MonoBehaviour {
         if (selectedSpawnType == 0)
         {
             Debug.Log("Should Spawn Robber");
-            Network.Instantiate(Resources.Load("Prefabs/Robber"), new Vector3(0, 20.0f, 0), Quaternion.identity, 0);
+            Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0);
         }
         else {
             Debug.Log("Should Spawn Cop");
-            Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0, 20.0f, 0), Quaternion.identity, 0);
+            Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0);
         }
     }
 
