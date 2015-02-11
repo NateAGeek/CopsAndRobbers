@@ -45,6 +45,19 @@ public class PlayerControl : MonoBehaviour
             {
                 rigidbody.velocity = Vector3.forward;
             }
+            if (Input.GetKeyDown("s"))
+            {
+                rigidbody.velocity = -Vector3.forward;
+            }
+            if (Input.GetKeyDown("a"))
+            {
+                rigidbody.velocity = Vector3.right;
+            }
+            if (Input.GetKeyDown("d"))
+            {
+                rigidbody.velocity = -Vector3.right;
+            }
+
         }
     }
 
@@ -67,7 +80,10 @@ public class PlayerControl : MonoBehaviour
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
             rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-            grounded = false;
+            if (grounded && Input.GetKeyDown("space")){
+                rigidbody.velocity = Vector3.up * 9.8f;
+                grounded = false;
+            }
         }
     }
 
