@@ -18,11 +18,12 @@ public class PlayerControl : MonoBehaviour
     public float gravity = 10.0f;
     public float maxVelocityChange = 10.0f;
     public bool canJump = true;
-    public float jumpHeight = 2.0f;
+    public float jumpVelocity = 2.0f;
     private bool grounded = false;
     float rotationY = 0F;
 
     void Start() {
+        Screen.showCursor = false;
         if (networkView.isMine)
         {
             cam.camera.active = true;
@@ -81,7 +82,7 @@ public class PlayerControl : MonoBehaviour
             velocityChange.y = 0;
             rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
             if (grounded && Input.GetKeyDown("space")){
-                rigidbody.velocity = Vector3.up * 9.8f;
+                rigidbody.velocity = Vector3.up * jumpVelocity;
                 grounded = false;
             }
         }
