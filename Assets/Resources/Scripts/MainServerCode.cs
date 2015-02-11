@@ -5,10 +5,20 @@ public class MainServerCode : MonoBehaviour {
     
     public string ipConnection = "127.0.0.1";
     public int portConnection = 6969;
-    
+
+    private int selectedSpawnType = 0;
+    private string[] options = new string[] { "Spawn Robber", "Spawn Cop" };
 
     void OnConnectedToServer() {
-        Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0, 0, 0), Quaternion.identity, 0);
+        if (selectedSpawnType == 0)
+        {
+            Debug.Log("Should Spawn Robber");
+            Network.Instantiate(Resources.Load("Prefabs/Robber"), new Vector3(0, 0, 0), Quaternion.identity, 0);
+        }
+        else {
+            Debug.Log("Should Spawn Cop");
+            Network.Instantiate(Resources.Load("Prefabs/Player"), new Vector3(0, 0, 0), Quaternion.identity, 0);
+        }
     }
 
     void ConnectToServer() {
@@ -23,16 +33,18 @@ public class MainServerCode : MonoBehaviour {
         if (!Network.isClient && !Network.isServer) {
             ipConnection = GUI.TextField(new Rect(10, 10, 100, 25), ipConnection);
             int.TryParse(GUI.TextField(new Rect(10, 35, 100, 25), portConnection.ToString()), out portConnection);
-
             if (GUI.Button(new Rect(10, 60, 200, 25), "Connect To Server (Client)")) {
                 ConnectToServer();
             }
             if (GUI.Button(new Rect(10, 100, 200, 25), "Become the Server (Host)")) {
                 SetServer();
             }
+            selectedSpawnType = GUI.SelectionGrid(new Rect(10, 125, 200, 50), selectedSpawnType, options, options.Length, "toggle");
         }
         else {
-            GUI.Label(new Rect(4, 24, 500, 16), "Connections: "+Network.connections.Length.ToString());
+            if (Network.isServer) {
+                GUI.Label(new Rect(4, 24, 500, 16), "Connections: " + Network.connections.Length.ToString());
+            }
         }
     }
 

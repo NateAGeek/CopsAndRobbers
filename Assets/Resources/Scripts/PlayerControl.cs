@@ -87,6 +87,15 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Robber") {
+            Debug.Log("Robber Lost!");
+            GUI.Label(new Rect(400, 400, 100, 100), "GAME OVER!");
+        }
+    }
+
     void OnCollisionStay()
     {
         grounded = true;
