@@ -4,39 +4,40 @@ using System.Collections;
 public class PlayerControl : MonoBehaviour
 {
     public GameObject cam;
-    public float sensitivityX = 15F;
-    public float sensitivityY = 15F;
 
-    public float minimumX = -360F;
-    public float maximumX = 360F;
+    public float sensitivityX = 15.0f;
+    public float sensitivityY = 15.0f;
 
-    public float minimumY = -60F;
-    public float maximumY = 60F;
+    public float minimumX = -360.0f;
+    public float maximumX = 360.0f;
+
+    public float minimumY = -60.0f;
+    public float maximumY = 60.0f;
 
 
     public float speed = 10.0f;
     public float gravity = 10.0f;
-    public float maxVelocityChange = 10.0f;
-    public bool canJump = true;
     public float jumpVelocity = 2.0f;
+    public float maxVelocitySpeed = 10.0f;
+
     private bool grounded = false;
-    float rotationY = 0F;
+    private float rotationY = 0F;
 
     void Start() {
         Screen.showCursor = false;
-        if (networkView.isMine)
+        /*if (networkView.isMine)
         {
             cam.camera.active = true;
         }
         else {
             cam.camera.active = false;
-        }
+        }*/
     }
 
     void Update()
     {
-        if (networkView.isMine)
-        {
+        //if (networkView.isMine)
+        //{
             float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
@@ -59,7 +60,7 @@ public class PlayerControl : MonoBehaviour
                 rigidbody.velocity = -Vector3.right;
             }
 
-        }
+        //}
     }
 
     void Awake()
@@ -69,36 +70,35 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (networkView.isMine)
-        {
+        //if (networkView.isMine)
+        //{
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             targetVelocity = transform.TransformDirection(targetVelocity);
             targetVelocity *= speed;
 
             Vector3 velocity = rigidbody.velocity;
             Vector3 velocityChange = (targetVelocity - velocity);
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocitySpeed, maxVelocitySpeed);
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocitySpeed, maxVelocitySpeed);
             velocityChange.y = 0;
             rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
             if (grounded && Input.GetKeyDown("space")){
                 rigidbody.velocity = Vector3.up * jumpVelocity;
                 grounded = false;
             }
-        }
+        //}
     }
 
     void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.tag == "Level")
+        {
+            grounded = true;
+        }
         if (collision.gameObject.tag == "Robber") {
             Debug.Log("Robber Lost!");
             GUI.Label(new Rect(400, 400, 100, 100), "GAME OVER!");
         }
-    }
 
-    void OnCollisionStay()
-    {
-        grounded = true;
     }
 }
