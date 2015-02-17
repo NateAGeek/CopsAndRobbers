@@ -7,6 +7,7 @@ public class MainServerCode : MonoBehaviour {
     public int portConnection = 6969;
 	public Transform spawnCops;
 	public Transform spawnRobber;
+    public Transform spawnMacGuffin;
 
     private int selectedSpawnType = 0;
     private string[] options = new string[] { "Spawn Robber", "Spawn Cop" };
@@ -21,6 +22,7 @@ public class MainServerCode : MonoBehaviour {
             Debug.Log("Should Spawn Cop");
             Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0);
         }
+        Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnMacGuffin.position, Quaternion.identity);
     }
 
     void ConnectToServer() {
@@ -29,6 +31,7 @@ public class MainServerCode : MonoBehaviour {
 
     void SetServer() {
         Network.InitializeServer(4, portConnection, true);
+        Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnMacGuffin.position, Quaternion.identity);
     }
 
     void OnGUI() {
@@ -52,7 +55,7 @@ public class MainServerCode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	   
 	}
 	
 	// Update is called once per frame

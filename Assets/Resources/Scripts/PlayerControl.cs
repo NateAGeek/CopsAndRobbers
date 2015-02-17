@@ -15,29 +15,31 @@ public class PlayerControl : MonoBehaviour
     public float maximumY = 60.0f;
 
 
-    public float speed = 10.0f;
+    public float walkSpeed = 3.0f;
+    public float runSpeed = 7.0f;
     public float gravity = 10.0f;
-    public float jumpVelocity = 2.0f;
-    public float maxVelocitySpeed = 10.0f;
+    public float jumpVelocity = 6.0f;
+    public float maxWalkSpeed = 3.0f;
+    public float maxRunSpeed = 7.0f;
 
     private bool grounded = false;
     private float rotationY = 0F;
 
     void Start() {
         Screen.showCursor = false;
-        /*if (networkView.isMine)
+        if (networkView.isMine)
         {
             cam.camera.active = true;
         }
         else {
             cam.camera.active = false;
-        }*/
+        }
     }
 
     void Update()
     {
-        //if (networkView.isMine)
-        //{
+        if (networkView.isMine)
+        {
             float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
@@ -60,7 +62,7 @@ public class PlayerControl : MonoBehaviour
                 rigidbody.velocity = -Vector3.right;
             }
 
-        //}
+        }
     }
 
     void Awake()
@@ -70,8 +72,18 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (networkView.isMine)
-        //{
+        if (networkView.isMine)
+        {
+            float speed;
+            float maxVelocitySpeed;
+
+            if(Input.GetButton("Run")){
+                speed = runSpeed;
+                maxVelocitySpeed = maxRunSpeed;
+            } else {
+                speed = walkSpeed;
+                maxVelocitySpeed = maxWalkSpeed;
+            }
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             targetVelocity = transform.TransformDirection(targetVelocity);
             targetVelocity *= speed;
@@ -86,7 +98,7 @@ public class PlayerControl : MonoBehaviour
                 rigidbody.velocity = Vector3.up * jumpVelocity;
                 grounded = false;
             }
-        //}
+        }
     }
 
     void OnCollisionEnter(Collision collision)
