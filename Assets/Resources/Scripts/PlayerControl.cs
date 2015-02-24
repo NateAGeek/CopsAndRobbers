@@ -26,20 +26,20 @@ public class PlayerControl : MonoBehaviour
     private float rotationY = 0F;
 
     void Start() {
-        Screen.showCursor = false;
-        if (networkView.isMine)
-        {
-            cam.camera.active = true;
-        }
-        else {
-            cam.camera.active = false;
-        }
+//        Screen.showCursor = false;
+//        if (networkView.isMine)
+//        {
+//            cam.camera.active = true;
+//        }
+//        else {
+//            cam.camera.active = false;
+//        }
     }
 
     void Update()
     {
-        if (networkView.isMine)
-        {
+//        if (networkView.isMine)
+//        {
             float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
@@ -62,7 +62,7 @@ public class PlayerControl : MonoBehaviour
                 rigidbody.velocity = -Vector3.right;
             }
 
-        }
+        //}
     }
 
     void Awake()
@@ -72,8 +72,8 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (networkView.isMine)
-        {
+//        if (networkView.isMine)
+//        {
             float speed;
             float maxVelocitySpeed;
 
@@ -98,7 +98,7 @@ public class PlayerControl : MonoBehaviour
                 rigidbody.velocity = Vector3.up * jumpVelocity;
                 grounded = false;
             }
-        }
+        //}
     }
 
     void OnCollisionEnter(Collision collision)
