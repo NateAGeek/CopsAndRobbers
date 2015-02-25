@@ -3,7 +3,7 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Tint ("Tint Color", Color) = (1.0, 1.0, 1.0, 1.0)
 		_OutlineColor ("Outline Color", Color) = (1.0, 1.0, 1.0, 1.0)
-		_OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 0.1
+		_OutlineThickness ("Outline Thickness", Range(0.0, 0.1)) = 0.0
 		
 	}
 	SubShader {
@@ -16,6 +16,7 @@
 			uniform float4 _Tint;
 			uniform float4 _OutlineColor;
 			uniform half _OutlineThickness;
+			uniform sampler2D _CameraDepthTexture;
 			
 			struct vertexInput {
 				float4 vertex : POSITION;
@@ -41,9 +42,9 @@
 				float3 view = normalize(_WorldSpaceCameraPos - output.posWorld);
 				output.normalDir = normalize(mul(float4(input.normal, 0.0), _World2Object).xyz);
 				
-				output.color.r = output.normalDir.x;
-				output.color.g = output.normalDir.y;
-				output.color.b = output.position.z/10.0;
+				output.color.r = output.normalDir.x * output.position.z;
+				output.color.g = distance(view, output.normalDir.xyz)/output.position.z;
+				output.color.b = log(output.position.z)*0.1;
 				
 				return output;
 			}
@@ -51,16 +52,6 @@
 			float4 fragmentShaderMain(vertexOutput o) : COLOR{
 				float4 tex = tex2D(_MainTex, o.tex.xy);
 				
-				//float3 view = normalize(_WorldSpaceCameraPos - o.posWorld);
-				//bool edgeDetection = (dot(view, o.normalDir) > _OutlineThickness) ? true : false;
-				
-				
-				//if(edgeDetection){
-					//return float4(o.normalDir, 1.0);
-					//return _Tint * float4(tex.xyz, 1.0);
-				//}else{
-					//return float4(o.normalDir, 1.0);
-				//}
 				return o.color;
 			}
 			ENDCG
