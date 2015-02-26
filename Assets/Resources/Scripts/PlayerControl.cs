@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
 
     private bool grounded = false;
     private float rotationY = 0F;
+    public int points = 0;
+    private GUIStyle pointsStyle;
 
     void Start() {
         Screen.showCursor = false;
@@ -34,6 +36,8 @@ public class PlayerControl : MonoBehaviour
         else {
             cam.camera.active = false;
         }
+        pointsStyle = new GUIStyle();
+        pointsStyle.fontSize = 40;
     }
 
     void Update()
@@ -99,6 +103,11 @@ public class PlayerControl : MonoBehaviour
                 grounded = false;
             }
         }
+    }
+
+    void OnGUI()
+    {
+         GUI.Label(new Rect(50, 10, 100, 20), points.ToString());
     }
 
     void OnCollisionEnter(Collision collision)

@@ -29,14 +29,9 @@ public class MacGuffinControl : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag == "Robber") {
-			networkView.RPC("startRobberTimer", RPCMode.Others);
+			PlayerControl robberControl = collision.gameObject.GetComponent("PlayerControl") as PlayerControl;
+			robberControl.points += 100;
 		}
 	}
 
-	[RPC]
-	void startRobberTimer()
-	{
-		startTime = (int)Time.time;
-		RobberControl = true;
-	}
 }
