@@ -5,6 +5,7 @@ public class MacGuffinControl : MonoBehaviour {
 	public int timeLimit = 120; //in seconds
 	private int startTime = 0;
 	private bool RobberControl = false;
+	private GUIStyle timerStyle;
 
 	// Use this for initialization
 	void Start () {
@@ -21,22 +22,8 @@ public class MacGuffinControl : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(RobberControl){
-			int currentTime = (int)Time.time - startTime;
-			int currentCountdown = timeLimit - currentTime;
-			int minutes;
-			int seconds;
-			if(currentCountdown <= 0){
-				minutes = 0;
-				seconds = 0;
-			} else {
-				minutes = currentCountdown / 60;
-				seconds = currentCountdown % 60;
-			}
-			
-			string text = minutes + " : " + seconds;
-			GUI.Label(new Rect(10, 10, 100, 20), text);
-		}
+		
+		
 	}
 
 	void OnCollisionEnter(Collision collision)
