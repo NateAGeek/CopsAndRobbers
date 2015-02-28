@@ -23,7 +23,6 @@
 			struct vertexInput {
 				float4 vertex : POSITION;
 				float3 normal : NORMAL;
-				float4 color : COLOR;
 				float4 texcoord : TEXCOORD0;
 			};
 			
@@ -50,15 +49,15 @@
 			 	float depthValue;
 			 	float3 normalValue;
 			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, o.scrPos.xy), depthValue, normalValue);
-			 	float4 center = float4(depthValue, depthValue, log(depthValue), depthValue) + float4(normalValue, 1);
+			 	float4 center = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
 			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + _OutlineThickness, o.scrPos.y + dy + _OutlineThickness)), depthValue, normalValue);
-			 	float4 top = float4(depthValue, depthValue, log(depthValue), depthValue) + float4(normalValue, 1);
+			 	float4 top = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
 			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + _OutlineThickness, (o.scrPos.y - dy) + _OutlineThickness)), depthValue, normalValue);
-			 	float4 bottom = float4(depthValue, depthValue, log(depthValue), depthValue) + float4(normalValue, 1);
+			 	float4 bottom = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
 			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + dx + _OutlineThickness, o.scrPos.y + _OutlineThickness)), depthValue, normalValue);
-			 	float4 right = float4(depthValue, depthValue, log(depthValue), depthValue) + float4(normalValue, 1);
+			 	float4 right = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
 			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2((o.scrPos.x - dx) + _OutlineThickness, o.scrPos.y + _OutlineThickness)), depthValue, normalValue);
-			 	float4 left = float4(depthValue, depthValue, log(depthValue), depthValue) + float4(normalValue, 1);
+			 	float4 left = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
 			 	
 				if(distance(center, bottom) > _OutlineThreshold || distance(center, top) > _OutlineThreshold || distance(center, right) > _OutlineThreshold || distance(center, left) > _OutlineThreshold){
 					return _OutlineColor;
