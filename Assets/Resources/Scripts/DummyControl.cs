@@ -57,6 +57,14 @@ public class DummyControl : MonoBehaviour
             {
                 rigidbody.velocity = -Vector3.right;
             }
+		if (Input.GetMouseButtonDown(0)) {
+			RaycastHit hit;
+			if(Physics.Raycast(cam.transform.position, transform.TransformDirection(Vector3.forward), out hit)){
+				Debug.DrawLine (transform.position, hit.point, Color.cyan);
+				Debug.Log(hit.collider.tag + ", " + hit.collider.name);
+			}
+			Debug.Log("Clicked");		
+		}
     }
 
     void Awake()

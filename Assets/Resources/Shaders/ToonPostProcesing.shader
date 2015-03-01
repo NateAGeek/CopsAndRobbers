@@ -1,9 +1,9 @@
 ﻿Shader "Custom/ToonPostProcesing" {
-	Properties {
+	Properties { 
 		_MainTex ("Post Image", 2D) = "white" {}
 		_OutlineColor ("Outline Color", Color) = (1.0, 1.0, 1.0, 1.0)
-		_OutlineThickness ("Outline Thickness", Range(0.0, 1.0)) = 0.1
-		_OutlineThreshold ("Outline Threshold", Range(0.0, 1.0)) = 0.1
+		_OutlineThickness ("Outline Thickness", Float) = 0.1
+		_OutlineThreshold ("Outline Threshold", Float) = 0.1
 	}
 	SubShader {
 		Pass{
@@ -49,23 +49,20 @@
 			 	float depthValue;
 			 	float3 normalValue;
 			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, o.scrPos.xy), depthValue, normalValue);
-			 	float4 center = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
-			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + _OutlineThickness, o.scrPos.y + dy + _OutlineThickness)), depthValue, normalValue);
-			 	float4 top = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
-			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + _OutlineThickness, (o.scrPos.y - dy) + _OutlineThickness)), depthValue, normalValue);
-			 	float4 bottom = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
-			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + dx + _OutlineThickness, o.scrPos.y + _OutlineThickness)), depthValue, normalValue);
-			 	float4 right = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
-			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2((o.scrPos.x - dx) + _OutlineThickness, o.scrPos.y + _OutlineThickness)), depthValue, normalValue);
-			 	float4 left = float4(depthValue, depthValue, depthValue, depthValue) + float4(normalValue, 1);
+			 	float4 center = log(depthValue) + float4(normalValue, 1);
+			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x, o.scrPos.y + dy + _OutlineThickness*dy)), depthValue, normalValue);
+			 	float4 top = log(depthValue) + float4(normalValue, 1);
+			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x, (o.scrPos.y - dy) - _OutlineThickness*dy)), depthValue, normalValue);
+			 	float4 bottom = log(depthValue) + float4(normalValue, 1);
+			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2(o.scrPos.x + dx + _OutlineThickness*dx, o.scrPos.y)), depthValue, normalValue);
+			 	float4 right = log(depthValue) + float4(normalValue, 1);
+			 	DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, float2((o.scrPos.x - dx) - _OutlineThickness*dx, o.scrPos.y)), depthValue, normalValue);
+			 	float4 left = log(depthValue) + float4(normalValue, 1);
 			 	
-				if(distance(center, bottom) > _OutlineThreshold || distance(center, top) > _OutlineThreshold || distance(center, right) > _OutlineThreshold || distance(center, left) > _OutlineThreshold){
+				if(distance(center, bottom) >= _OutlineThreshold || distance(center, top) >= _OutlineThreshold || distance(center, right) >= _OutlineThreshold || distance(center, left) >= _OutlineThreshold){
 					return _OutlineColor;
 				}
-				else{
-					return tex2D( _MainTex, o.tex.xy);
-				}
-	
+				return tex2D( _MainTex, o.tex.xy);
 			}
 		
 		ENDCG

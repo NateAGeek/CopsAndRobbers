@@ -2,7 +2,7 @@
 using System.Collections;
 
 [ExecuteInEditMode]
-public class PostProcessingScript : MonoBehaviour {
+public class PostProcessingScriptOutline : MonoBehaviour {
 
 	public Material ShaderMaterial;
 
