@@ -58,9 +58,10 @@ public class DummyControl : MonoBehaviour
                 rigidbody.velocity = -Vector3.right;
             }
 		if (Input.GetMouseButtonDown(0)) {
+			Ray CameraRay = cam.camera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
 			RaycastHit hit;
-			if(Physics.Raycast(cam.transform.position, transform.TransformDirection(Vector3.forward), out hit)){
-				Debug.DrawLine (transform.position, hit.point, Color.cyan);
+			if(Physics.Raycast(CameraRay, out hit)){
+				Debug.DrawLine (CameraRay.origin, hit.point, Color.cyan);
 				Debug.Log(hit.collider.tag + ", " + hit.collider.name);
 			}
 			Debug.Log("Clicked");		
