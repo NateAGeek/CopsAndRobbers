@@ -89,7 +89,7 @@
                 
                 float3 lightFinal = rampColor * UNITY_LIGHTMODEL_AMBIENT.rgb;
                 
-				return tex2D(_MainTex, o.tex) * float4(lightFinal, 1.0) * float4(diffuseRef, 1.0) * _Strength;
+				return tex2D(_MainTex, o.tex.xy) * float4(lightFinal, 1.0) * float4(diffuseRef, 1.0) * _Strength;
 			}
 			ENDCG
 		}
@@ -176,7 +176,7 @@
                 
                 float3 lightFinal = rampColor * UNITY_LIGHTMODEL_AMBIENT.rgb;
                 
-				return tex2D(_MainTex, o.tex) * float4(lightFinal, 1.0) * float4(diffuseRef, 1.0) * _Strength;
+				return tex2D(_MainTex, o.tex.xy) * float4(lightFinal, 1.0) * float4(diffuseRef, 1.0) * _Strength;
 			}
 			ENDCG
 		}

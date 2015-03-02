@@ -36,7 +36,7 @@
 				float2 inTex = o.tex - 0.5f;
 				float vignette = 1 - dot(inTex, inTex);
 				
-				return tex2D(_MainTex, o.tex) * saturate(pow(vignette, _Radius));
+				return tex2D(_MainTex, o.tex.xy) * saturate(pow(vignette, _Radius));
 			}
 			ENDCG
 		}
