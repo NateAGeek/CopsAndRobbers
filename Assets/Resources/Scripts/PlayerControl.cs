@@ -22,10 +22,13 @@ public class PlayerControl : MonoBehaviour
     public float maxWalkSpeed = 3.0f;
     public float maxRunSpeed = 7.0f;
 
+	public bool isRobber;
+
     private bool grounded = false;
     private float rotationY = 0F;
     public int points = 0;
     private GUIStyle pointsStyle;
+	
 
     void Start() {
         Screen.showCursor = false;
@@ -81,6 +84,10 @@ public class PlayerControl : MonoBehaviour
             float speed;
             float maxVelocitySpeed;
 
+			if(Input.GetMouseButtonDown(0)){
+				Ray initPos = cam.camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+				Network.Instantiate(Resources.Load("Prefabs/Slow Beam"), initPos.origin, transform.rotation, 0);
+			}
             if(Input.GetButton("Run")){
                 speed = runSpeed;
                 maxVelocitySpeed = maxRunSpeed;
@@ -110,8 +117,17 @@ public class PlayerControl : MonoBehaviour
          GUI.Label(new Rect(50, 10, 100, 20), points.ToString());
     }
 
+	void OnTriggerEnter(Collider collision) {
+		if (collision.gameObject.tag == "SlowBeam" && isRobber) {
+			runSpeed -= 0.5f;
+			Debug.Log("Hit with the slow beam");
+			Destroy(collision.gameObject);
+		}
+	}
+
     void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.tag == "Level")
         {
             grounded = true;
