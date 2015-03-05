@@ -78,6 +78,12 @@ public class DummyControl : MonoBehaviour
             float speed;
             float maxVelocitySpeed;
 
+			if(Input.GetMouseButtonDown(0)){
+				Ray initPos = cam.camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+				Rigidbody SlowBeam;
+				SlowBeam = Instantiate(Resources.Load("Prefabs/Slow Beam"), initPos.origin, transform.rotation) as Rigidbody;
+			}
+
             if(Input.GetButton("Run")){
                 speed = runSpeed;
                 maxVelocitySpeed = maxRunSpeed;
