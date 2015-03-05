@@ -1,40 +1,79 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class FindGameGUI : IGUIState {
-
+public class FindGameGUI : MonoBehaviour, IGUIState {
+	public Text ipAddress;
+	public Text portConn;
+	public Text defaultIP;
+	public Text defaultPort;
 	private MainServerCode serverControl;
-	private string nextState;
 
-	public FindGameGUI()
+	void Start()
 	{
 		serverControl = GameObject.Find("GlobalServerObject").GetComponent("MainServerCode") as MainServerCode;
-		nextState = GUIName();
 	}
 
 	public void drawGUI()
 	{
+        
+	}
+
+	public void onPush()
+	{
+		onActive();
+	}
+
+	public void onPop()
+	{
+		onDeactive();
+	}
+
+	public void onActive()
+	{
+		gameObject.SetActive(true);
+	}
+
+	public void onDeactive()
+	{
+		gameObject.SetActive(false);
+	}
+
+	public void ConnectToServerBtnClicked()
+	{
+		
+		string ip;
 		int port;
-		serverControl.IPConnection = GUI.TextField(new Rect(10, 10, 100, 25), serverControl.IPConnection);
-        int.TryParse(GUI.TextField(new Rect(10, 35, 100, 25), serverControl.PortConnection.ToString()), out port);
-        serverControl.PortConnection = port;
-        if (GUI.Button(new Rect(10, 60, 200, 25), "Connect To Server (Client)")) {
-            serverControl.ConnectToServer();
-            nextState = "ClientWaitingForStart";
-        }
-        if (GUI.Button(new Rect(10, 100, 200, 25), "Become the Server (Host)")) {
-            serverControl.SetServer();
-            nextState = "ServerWaitingForStart";
-        }
+		if(ipAddress.text.Length > 0){
+			ip = ipAddress.text;
+		} else {
+			ip = defaultIP.text;
+		}
+		if(portConn.text.Length > 0){
+			int.TryParse(portConn.text, out port);
+		} else {
+			int.TryParse(defaultPort.text, out port);
+		}
+		
+		serverControl.IPConnection = ip;
+		serverControl.PortConnection = port;
+		serverControl.ConnectToServer();
+		
+		GUIManager.SetGUI("ClientWaitingForStart");
 	}
 
-	public string nextGUI()
+	public void BecomeServerBtnClicked()
 	{
-		return nextState;
-	}
+		int port;
+		if(portConn.text.Length > 0){
+			int.TryParse(portConn.text, out port);
+		} else {
+			int.TryParse(defaultPort.text, out port);
+		}
 
-	public string GUIName()
-	{
-		return "FindGameGUI";
+		serverControl.PortConnection = port;
+		serverControl.SetServer();
+
+		GUIManager.SetGUI("ServerWaitingForStart");
 	}
 }

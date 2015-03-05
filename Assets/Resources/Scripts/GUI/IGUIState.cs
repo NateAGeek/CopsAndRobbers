@@ -5,7 +5,11 @@ public interface IGUIState {
 
 	void drawGUI();
 
-	string nextGUI();
+	void onPush();
 
-	string GUIName();
+	void onPop();
+
+	void onActive();
+
+	void onDeactive();
 }

@@ -103,7 +103,7 @@ public class DummyControl : MonoBehaviour
 
     void OnGUI()
     {
-         GUI.Label(new Rect(50, 10, 100, 20), points.ToString());
+         //GUI.Label(new Rect(50, 10, 100, 20), points.ToString());
     }
 
     void OnCollisionEnter(Collision collision)

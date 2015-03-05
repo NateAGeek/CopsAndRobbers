@@ -1,15 +1,36 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class ClientWaitingForStart : MonoBehaviour {
+public class ClientWaitingForStart : MonoBehaviour, IGUIState {
 
-	// Use this for initialization
-	void Start () {
-	
+	void Start()
+	{
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void drawGUI()
+	{
+
+	}
+
+	public void onPush()
+	{
+		onActive();
+	}
+
+	public void onPop()
+	{
+		onDeactive();
+	}
+
+	public void onActive()
+	{
+		gameObject.SetActive(true);
+	}
+
+	public void onDeactive()
+	{
+		gameObject.SetActive(false);
 	}
 }

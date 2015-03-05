@@ -1,15 +1,46 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class ServerWaitingForStart : MonoBehaviour {
+public class ServerWaitingForStart : MonoBehaviour, IGUIState {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Text connectionsText;
+	private MainServerCode serverControl;
+
+	void Start()
+	{
+		serverControl = GameObject.Find("GlobalServerObject").GetComponent("MainServerCode") as MainServerCode;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnPlayerConnected()
+	{
+		connectionsText.text = "Connections: " + Network.connections.Length.ToString();
+	}
+
+	public void drawGUI()
+	{
+
+	}
+
+	public void onPush()
+	{
+		onActive();
+	}
+
+	public void onPop()
+	{
+		onDeactive();
+	}
+
+	public void onActive()
+	{
+		connectionsText.text = "Connections: " + Network.connections.Length.ToString();
+
+		gameObject.SetActive(true);
+	}
+
+	public void onDeactive()
+	{
+		gameObject.SetActive(false);
 	}
 }
