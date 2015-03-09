@@ -22,10 +22,24 @@ public class DummyControl : MonoBehaviour
     public float maxWalkSpeed = 3.0f;
     public float maxRunSpeed = 7.0f;
 
+	private bool isRunning = false;
     private bool grounded = false;
     private float rotationY = 0F;
     public int points = 0;
     private GUIStyle pointsStyle;
+
+	//Abilities are: SlowBeam, Grap Hook, Parkour
+	private string currentAbility = "Parkour";
+
+
+	//Slowbeam Vars
+	private float chargeTimer = 0.0f;
+	private bool charging = false;
+	public float chargeTime = 5.0f;
+
+	//Grap Hook Vars
+	private bool isHooked = false;
+
 
     void Start() {
         Screen.showCursor = false;
@@ -36,35 +50,63 @@ public class DummyControl : MonoBehaviour
 
     void Update()
     {
-            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-            transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+		float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+		rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+		transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+		
+		if (Input.GetKeyDown("w"))
+		{
+		    rigidbody.velocity = Vector3.forward;
+		}
+		if (Input.GetKeyDown("s"))
+		{
+		    rigidbody.velocity = -Vector3.forward;
+		}
+		if (Input.GetKeyDown("a"))
+		{
+		    rigidbody.velocity = Vector3.right;
+		}
+		if (Input.GetKeyDown("d"))
+		{
+		    rigidbody.velocity = -Vector3.right;
+		}
+		if (Input.GetKeyDown (KeyCode.LeftControl)) {
+			transform.localScale -= new Vector3(0.0f, 0.25f, 0.0f);
+		}
+		if (Input.GetKeyUp ((KeyCode.LeftControl))) {
+			transform.localScale += new Vector3(0.0f, 0.25f, 0.0f);
+		}
 
-            if (Input.GetKeyDown("w"))
-            {
-                rigidbody.velocity = Vector3.forward;
-            }
-            if (Input.GetKeyDown("s"))
-            {
-                rigidbody.velocity = -Vector3.forward;
-            }
-            if (Input.GetKeyDown("a"))
-            {
-                rigidbody.velocity = Vector3.right;
-            }
-            if (Input.GetKeyDown("d"))
-            {
-                rigidbody.velocity = -Vector3.right;
-            }
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0) && currentAbility == "GrapHook") {
 			Ray CameraRay = cam.camera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
 			RaycastHit hit;
 			if(Physics.Raycast(CameraRay, out hit)){
-				Debug.DrawLine (CameraRay.origin, hit.point, Color.cyan);
-				Debug.Log(hit.collider.tag + ", " + hit.collider.name);
+				if(hit.collider.tag == "Edge"){
+					rigidbody.useGravity = false;
+					Vector3 hookDir = hit.point - CameraRay.origin;
+					rigidbody.AddForce( hookDir * hookDir.magnitude);
+				}
 			}
-			Debug.Log("Clicked");		
+		}
+		if (Input.GetMouseButtonUp (0) && currentAbility == "GrapHook") {
+			rigidbody.useGravity = true;		
+		}
+		if(Input.GetMouseButtonDown(0) && currentAbility == "SlowBeam"){
+			charging = true;
+		}
+		if (charging) {
+			chargeTimer += Time.deltaTime;
+		}
+		if (Input.GetMouseButtonUp(0) && currentAbility == "SlowBeam" && chargeTimer >= chargeTime) {
+			charging = false;
+			chargeTimer = 0.0f;
+			Ray initPos = cam.camera.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0.0f));
+			Rigidbody SlowBeam;
+			SlowBeam = Instantiate(Resources.Load ("Prefabs/Slow Beam"), initPos.origin, transform.rotation) as Rigidbody;
+		} else if(Input.GetMouseButtonUp(0)) {
+			charging = false;
+			chargeTimer = 0.0f;
 		}
     }
 
@@ -78,16 +120,12 @@ public class DummyControl : MonoBehaviour
             float speed;
             float maxVelocitySpeed;
 
-			if(Input.GetMouseButtonDown(0)){
-				Ray initPos = cam.camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-				Rigidbody SlowBeam;
-				SlowBeam = Instantiate(Resources.Load("Prefabs/Slow Beam"), initPos.origin, transform.rotation) as Rigidbody;
-			}
-
             if(Input.GetButton("Run")){
                 speed = runSpeed;
                 maxVelocitySpeed = maxRunSpeed;
+				isRunning = true;
             } else {
+				isRunning = false;
                 speed = walkSpeed;
                 maxVelocitySpeed = maxWalkSpeed;
             }
@@ -114,6 +152,9 @@ public class DummyControl : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+		if (isRunning && currentAbility == "Parkour" && collision.collider.tag == "Parkour_Surface") {
+			
+		}
         if (collision.gameObject.tag == "Level")
         {
             grounded = true;
@@ -124,4 +165,9 @@ public class DummyControl : MonoBehaviour
         }
 
     }
+	void OnTriggerEnter(Collider hit){
+		if (hit.tag == "Edge") {
+			rigidbody.velocity = Vector3.zero;
+		}
+	}
 }
