@@ -77,15 +77,7 @@
                 
                 float3 rampColor = tex2D(_RampTex, float2(0.0, 0.0));
                 
-                if(intensity > 0.95){
-                	rampColor = tex2D(_RampTex, float2(0.0, 0.0));
-                }else if(intensity > 0.5){
-                	rampColor = tex2D(_RampTex, float2(0.25, 0.0));
-                }else if(intensity > 0.25){
-                	rampColor = tex2D(_RampTex, float2(0.50, 0.0));
-                }else{
-                	rampColor = tex2D(_RampTex, float2(0.75, 0.0));
-                }
+                rampColor = tex2D(_RampTex, float2(intensity, 0.0));
                 
                 float3 lightFinal = rampColor * UNITY_LIGHTMODEL_AMBIENT.rgb;
                 
