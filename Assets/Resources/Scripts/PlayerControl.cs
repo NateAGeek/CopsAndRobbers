@@ -148,4 +148,7 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+		Network.Destroy(gameObject);
+	}
 }
