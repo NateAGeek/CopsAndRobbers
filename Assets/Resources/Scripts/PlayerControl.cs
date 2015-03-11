@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour
     private float rotationY = 0F;
     public int points = 0;
     private GUIStyle pointsStyle;
+	private float chargeTime = 0;
 	
 
     void Start() {
@@ -84,10 +85,19 @@ public class PlayerControl : MonoBehaviour
             float speed;
             float maxVelocitySpeed;
 
-			if(Input.GetMouseButtonDown(0)){
-				Ray initPos = cam.camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-				Network.Instantiate(Resources.Load("Prefabs/Slow Beam"), initPos.origin, transform.rotation, 0);
+			if(Input.GetMouseButton(0)){
+				chargeTime += Time.deltaTime;
+				Debug.Log("Charge Time:" + chargeTime);
 			}
+
+			if(Input.GetMouseButtonUp(0)){
+				if(chargeTime >= 5.0f){
+					Ray initPos = cam.camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+					Network.Instantiate(Resources.Load("Prefabs/Slow Beam"), initPos.origin, transform.rotation, 0);
+				}
+				chargeTime = 0.0f;
+			}
+
             if(Input.GetButton("Run")){
                 speed = runSpeed;
                 maxVelocitySpeed = maxRunSpeed;
