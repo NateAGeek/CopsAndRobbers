@@ -28,8 +28,8 @@ public class DummyControl : MonoBehaviour
     public int points = 0;
     private GUIStyle pointsStyle;
 
-	//Abilities are: SlowBeam, Grap Hook, Parkour
-	private string currentAbility = "Parkour";
+	//Abilities are: SlowBeam, GrapHook, Parkour, StunTraps, IRGlasses
+	private string currentAbility = "IRGlasses";
 
 
 	//Slowbeam Vars
@@ -40,6 +40,18 @@ public class DummyControl : MonoBehaviour
 	//Grap Hook Vars
 	private bool isHooked = false;
 
+	//Parkour Vars
+	private bool isParkout = false;
+	private float ParkcourTime = 5.0f;
+	private float ParkcourTimer = 0.0f;
+	private float speed = 0.0f;
+
+	//StunTrap Vars
+	private bool isStunned = false;
+	private float StunnedTime = 5.0f;
+	private float StunnedTimer = 0.0f;
+
+	//IRGlasses Vars
 
     void Start() {
         Screen.showCursor = false;
@@ -50,6 +62,7 @@ public class DummyControl : MonoBehaviour
 
     void Update()
     {
+
 		float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 		rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
@@ -78,6 +91,29 @@ public class DummyControl : MonoBehaviour
 			transform.localScale += new Vector3(0.0f, 0.25f, 0.0f);
 		}
 
+		if(Input.GetMouseButtonUp (0) && currentAbility == "IRGlasses"){
+			cam.GetComponent<PostProcessingIRGlasses>().enabled = !cam.GetComponent<PostProcessingIRGlasses>().enabled;
+		}
+
+		if (isStunned) {
+			StunnedTimer += Time.deltaTime;
+		}
+
+		if (isParkout) {
+			ParkcourTimer += Time.deltaTime;
+		}
+
+		if (Input.GetMouseButtonDown (0) && currentAbility == "StunTrap") {
+			Ray CameraRay = cam.camera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
+			RaycastHit hit;
+			if(Physics.Raycast(CameraRay, out hit) && hit.distance < 5.0f){
+				if(hit.collider.tag == "Level"){
+					Instantiate(Resources.Load("Prefabs/StunTrap"), hit.point, hit.transform.rotation);
+				}
+			}
+
+		}
+
 		if (Input.GetMouseButtonDown(0) && currentAbility == "GrapHook") {
 			Ray CameraRay = cam.camera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
 			RaycastHit hit;
@@ -85,7 +121,7 @@ public class DummyControl : MonoBehaviour
 				if(hit.collider.tag == "Edge"){
 					rigidbody.useGravity = false;
 					Vector3 hookDir = hit.point - CameraRay.origin;
-					rigidbody.AddForce( hookDir * hookDir.magnitude);
+					rigidbody.AddForce( hookDir * 1000.0f);
 				}
 			}
 		}
@@ -117,18 +153,19 @@ public class DummyControl : MonoBehaviour
 
     void FixedUpdate()
     {
-            float speed;
             float maxVelocitySpeed;
 
-            if(Input.GetButton("Run")){
+            if(Input.GetButton("Run") && !isParkout){
                 speed = runSpeed;
                 maxVelocitySpeed = maxRunSpeed;
 				isRunning = true;
-            } else {
+			} else if(!isParkout){
 				isRunning = false;
                 speed = walkSpeed;
                 maxVelocitySpeed = maxWalkSpeed;
-            }
+			}else{
+				maxVelocitySpeed = 3.0f;
+			}
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             targetVelocity = transform.TransformDirection(targetVelocity);
             targetVelocity *= speed;
@@ -138,8 +175,10 @@ public class DummyControl : MonoBehaviour
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocitySpeed, maxVelocitySpeed);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocitySpeed, maxVelocitySpeed);
             velocityChange.y = 0;
-            rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-            if (grounded && Input.GetKeyDown("space")){
+			if (!isStunned) {
+				rigidbody.AddForce (velocityChange, ForceMode.VelocityChange);
+			}
+			if (grounded && Input.GetKeyDown("space") && !isStunned){
                 rigidbody.velocity = Vector3.up * jumpVelocity;
                 grounded = false;
             }
@@ -152,11 +191,20 @@ public class DummyControl : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-		if (isRunning && currentAbility == "Parkour" && collision.collider.tag == "Parkour_Surface") {
-			
+
+		if (currentAbility == "Parkour" && collision.collider.tag == "Parkour_Surface" && ParkcourTimer <= ParkcourTime) {
+			grounded = false;
+			isParkout = true;
+			speed = 4.0f;
+			//rigidbody.useGravity = false;
+		}else{
+			isParkout = false;
+			grounded = false;
 		}
         if (collision.gameObject.tag == "Level")
         {
+			ParkcourTimer = 0.0f;
+			speed = 7.0f;
             grounded = true;
         }
         if (collision.gameObject.tag == "Robber") {
@@ -165,9 +213,33 @@ public class DummyControl : MonoBehaviour
         }
 
     }
+
+	void OnCollisionExit(Collision collision) {
+		if (collision.collider.tag == "Parkour_Surface") {
+			isParkout = false;
+			grounded = false;
+			rigidbody.useGravity = true;	
+		}
+		if (collision.collider.tag == "StunTrap") {
+			Debug.Log ("Should Un Stun?");
+			StunnedTimer = 0.0f;		
+		}
+	}
+
 	void OnTriggerEnter(Collider hit){
+		if (hit.collider.tag == "StunTrap" && StunnedTimer <= StunnedTime) {
+			isStunned = true;
+		}
 		if (hit.tag == "Edge") {
 			rigidbody.velocity = Vector3.zero;
 		}
 	}
+	void OnTriggerExit(Collider hit){
+		if (hit.collider.tag == "StunTrap") {
+			StunnedTimer = 0.0f;
+			isStunned = false;
+			Destroy(hit.gameObject);
+		}
+	}
+
 }
