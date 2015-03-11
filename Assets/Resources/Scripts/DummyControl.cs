@@ -5,6 +5,8 @@ public class DummyControl : MonoBehaviour
 {
     public GameObject cam;
 
+	private string[] ab = {"SlowBeam", "GrapHook", "StunTrap", "IRGlasses"};
+
     public float sensitivityX = 15.0f;
     public float sensitivityY = 15.0f;
 
@@ -28,7 +30,7 @@ public class DummyControl : MonoBehaviour
     public int points = 0;
     private GUIStyle pointsStyle;
 
-	//Abilities are: SlowBeam, GrapHook, Parkour, StunTraps, IRGlasses
+	//Abilities are: SlowBeam, GrapHook, Parkour, StunTrap, IRGlasses
 	private string currentAbility = "IRGlasses";
 
 
@@ -54,6 +56,8 @@ public class DummyControl : MonoBehaviour
 	//IRGlasses Vars
 
     void Start() {
+		currentAbility = ab[Random.Range(0, 3)];
+		Debug.Log ("Abbility:"+currentAbility);
         Screen.showCursor = false;
         cam.camera.active = true;
         pointsStyle = new GUIStyle();
@@ -91,7 +95,7 @@ public class DummyControl : MonoBehaviour
 			transform.localScale += new Vector3(0.0f, 0.25f, 0.0f);
 		}
 
-		if(Input.GetMouseButtonUp (0) && -currentAbility == "IRGlasses"){
+		if(Input.GetMouseButtonUp (0) && currentAbility == "IRGlasses"){
 			cam.GetComponent<PostProcessingIRGlasses>().enabled = !cam.GetComponent<PostProcessingIRGlasses>().enabled;
 		}
 
