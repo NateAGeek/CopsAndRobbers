@@ -12,10 +12,12 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.137 seconds
+- Completed reload, in  0.124 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
 Initialize engine version: 4.6.1f1 (d1db7a1b5196)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -30,23 +32,57 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.049 seconds
+- Completed reload, in  0.089 seconds
+sendto failed with code -1 for char 9 and length 1464.
+sendto failed with code -1 for char 9 and length 1464.
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+sendto failed with code -1 for char 9 and length 1464.
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
-sendto failed with code -1 for char 9 and length 1464.
-sendto failed with code -1 for char 9 and length 1464.
-sendto failed with code -1 for char 9 and length 1464.
 sendto failed with code -1 for char 9 and length 1464.
 The connection request to 67.225.180.24:50005 failed. Are you sure the server can be connected to?
  
 (Filename:  Line: 650)
 
+Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
+Network Instantiate
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Sender: 0
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+This: 2152122058000
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
 Load Level
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network Instantiate
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Sender: 2152122058000
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+This: 36030949129237968
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Network Instantiate
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Sender: 36030939807508968
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+This: 36030949129237968
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
@@ -58,6 +94,18 @@ NullReferenceException: Object reference not set to an instance of an object
   at MainServerCode.LoadLevel (System.String robberGuid) [0x00000] in <filename unknown>:0 
  
 (Filename:  Line: -1)
+
+Network Instantiate
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Sender: 
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+This: 2152122058000
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
 NullReferenceException: Object reference not set to an instance of an object
   at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 

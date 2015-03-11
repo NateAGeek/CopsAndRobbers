@@ -82,6 +82,7 @@ public class GUIManager : MonoBehaviour {
 				newGUI = gameHUD;
 				break;
 			default:
+				Debug.Log("GUI Name nonsense");
 				return;
 		}
 		oldGUI = stateStack.Peek();

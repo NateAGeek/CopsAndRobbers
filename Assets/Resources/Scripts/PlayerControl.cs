@@ -129,7 +129,11 @@ public class PlayerControl : MonoBehaviour
 
     void OnNetworkInstantiate(NetworkMessageInfo info)
     {
+        Debug.Log("Network Instantiate");
+        Debug.Log("Sender: " + info.sender.guid.ToString());
+        Debug.Log("This: " + Network.player.guid.ToString());
         if(info.sender.guid == Network.player.guid){
+            Debug.Log("Network Instantiate Match");
             GUIManager.AttachPlayer(this);
         }
     }
