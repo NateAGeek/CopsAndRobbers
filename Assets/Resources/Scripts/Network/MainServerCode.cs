@@ -42,7 +42,7 @@ public class MainServerCode : MonoBehaviour {
     }
 
     void OnGUI() {
-        
+        /*
         if (!Network.isClient && !Network.isServer) {
             ipConnection = GUI.TextField(new Rect(10, 10, 100, 25), ipConnection);
             int.TryParse(GUI.TextField(new Rect(10, 35, 100, 25), portConnection.ToString()), out portConnection);
@@ -81,6 +81,7 @@ public class MainServerCode : MonoBehaviour {
                 GUI.Label(new Rect(10, 10, 100, 20), text, timerStyle);
             }
         }
+*/
     }
 
 	// Use this for initialization
@@ -103,6 +104,17 @@ public class MainServerCode : MonoBehaviour {
             Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0);
         }
         roundOn = true;
+        Debug.Log("Load Level");
+        GUIManager.SetGUI("GameHUD");
+    }
+
+    public void StartGame()
+    {
+        GameObject[] spawnObjects = GameObject.FindGameObjectsWithTag("MacGuffin");
+        for(int i = 0; i < spawnObjects.Length; i++){
+            Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnObjects[i].transform.position, Quaternion.identity, 0);
+        }
+        networkView.RPC("LoadLevel", RPCMode.Others, Network.connections[currentRobber].guid);
     }
 
     public string IPConnection

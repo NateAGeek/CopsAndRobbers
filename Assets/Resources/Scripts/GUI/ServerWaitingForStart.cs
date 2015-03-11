@@ -43,4 +43,9 @@ public class ServerWaitingForStart : MonoBehaviour, IGUIState {
 	{
 		gameObject.SetActive(false);
 	}
+
+	public void StartGameBtnClicked()
+	{
+		serverControl.StartGame();
+	}
 }

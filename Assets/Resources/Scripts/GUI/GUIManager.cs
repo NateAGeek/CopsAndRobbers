@@ -6,12 +6,14 @@ public class GUIManager : MonoBehaviour {
 	public GameObject FindGameGUIObj;
 	public GameObject ServerWaitingGUIObj;
 	public GameObject ClientWaitingGUIObj;
+	public GameObject GameHUDGUIObj;
 
 	private static GUIManager instance;
 
 	private IGUIState findGameGUI;
 	private IGUIState serverWaiting;
 	private IGUIState clientWaiting;
+	private IGUIState gameHUD;
 
 	private Stack<IGUIState> stateStack;
 
@@ -21,6 +23,7 @@ public class GUIManager : MonoBehaviour {
 		findGameGUI = FindGameGUIObj.GetComponent("FindGameGUI") as IGUIState;
 		serverWaiting = ServerWaitingGUIObj.GetComponent("ServerWaitingForStart") as IGUIState;
 		clientWaiting = ClientWaitingGUIObj.GetComponent("ClientWaitingForStart") as IGUIState;
+		gameHUD = GameHUDGUIObj.GetComponent("GameHUD") as IGUIState;
 		stateStack = new Stack<IGUIState>();
 		stateStack.Push(findGameGUI);
 		stateStack.Peek().onPush();
@@ -75,6 +78,9 @@ public class GUIManager : MonoBehaviour {
 			case "ServerWaitingForStart":
 				newGUI = serverWaiting;
 				break;
+			case "GameHUD":
+				newGUI = gameHUD;
+				break;
 			default:
 				return;
 		}
@@ -87,6 +93,12 @@ public class GUIManager : MonoBehaviour {
 	public static void SetGUI(string guiName)
 	{
 		instance.drawNewGUI(guiName);
+	}
+
+	public static void AttachPlayer(PlayerControl p)
+	{
+		GameHUD g = (GameHUD)instance.gameHUD;
+		g.attachPlayer(p);
 	}
 
 }
