@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DummyControl : MonoBehaviour
 {
@@ -30,8 +31,10 @@ public class DummyControl : MonoBehaviour
     public int points = 0;
     private GUIStyle pointsStyle;
 
+	private Dictionary<string, Ability> Abilities = new Dictionary<string, Ability>();
+
 	//Abilities are: SlowBeam, GrapHook, Parkour, StunTrap, IRGlasses
-	private string currentAbility = "IRGlasses";
+	private string currentAbility = "SlowBeam";
 
 
 	//Slowbeam Vars
@@ -56,7 +59,9 @@ public class DummyControl : MonoBehaviour
 	//IRGlasses Vars
 
     void Start() {
-		currentAbility = ab[Random.Range(0, 3)];
+		Abilities["SlowBeam"] = new SlowBeam(gameObject);
+
+		//currentAbility = ab[Random.Range(0, 3)];
 		Debug.Log ("Abbility:"+currentAbility);
         Screen.showCursor = false;
         cam.camera.active = true;
@@ -135,19 +140,7 @@ public class DummyControl : MonoBehaviour
 		if(Input.GetMouseButtonDown(0) && currentAbility == "SlowBeam"){
 			charging = true;
 		}
-		if (charging) {
-			chargeTimer += Time.deltaTime;
-		}
-		if (Input.GetMouseButtonUp(0) && currentAbility == "SlowBeam" && chargeTimer >= chargeTime) {
-			charging = false;
-			chargeTimer = 0.0f;
-			Ray initPos = cam.camera.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0.0f));
-			Rigidbody SlowBeam;
-			SlowBeam = Instantiate(Resources.Load ("Prefabs/Slow Beam"), initPos.origin, transform.rotation) as Rigidbody;
-		} else if(Input.GetMouseButtonUp(0)) {
-			charging = false;
-			chargeTimer = 0.0f;
-		}
+		Abilities[currentAbility].Activate();
     }
 
     void Awake()

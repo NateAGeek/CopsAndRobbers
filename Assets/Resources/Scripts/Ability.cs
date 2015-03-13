@@ -1,4 +1,9 @@
 interface Ability {
-	void excuteAction();
+
+	void OnActivate();
+	void Activate();
+
+	void OnOver();
+	void OnRemove();
 }
 
