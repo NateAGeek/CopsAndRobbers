@@ -1,39 +1,14 @@
-using UnityEngine;
-
-interface Ability {
-
-	void OnActivate();
-	void Activate();
-
-	void OnOver();
-	void OnRemove();
-
-	//Collision
-	void OnCollisionEnter(Collision hit);
-	void OnCollisionExit(Collision hit);
-
-	//Triggers
-	void OnTriggerEnter(Collider hit);
-	void OnTriggerExit(Collider hit);
-}
-
-/*
- * 
- * 
- * An example of the Ability interface
- * 
- * 
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class Example : Ability {
-	public string name = "Example";
-	public string discription = "Example Type";
+public class ParkourPassive : PassiveAbility {
+	public string name = "Parkour";
+	public string discription = "Allows the player to use the Parkour ";
 	
 	private bool activated = false;
 	private GameObject Entity;
 	
-	public Example(GameObject entity){
+	public ParkourPassive(GameObject entity){
 		Entity = entity;
 	}
 	
@@ -58,10 +33,14 @@ public class Example : Ability {
 	}
 	
 	public void OnTriggerEnter(Collider entityHit){
-		
+		if (entityHit.tag == "Parkour_Surface") {
+			Entity.rigidbody.useGravity = false;		
+		}
 	}
 	public void OnTriggerExit(Collider entityHit){
-		
+		if (entityHit.tag == "Parkour_Surface") {
+			Entity.rigidbody.useGravity = true;		
+		}
 	}
 	
 	public void OnOver(){
@@ -72,4 +51,3 @@ public class Example : Ability {
 		
 	}
 }
-*/

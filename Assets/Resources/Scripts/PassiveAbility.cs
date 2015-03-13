@@ -1,32 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-interface Ability {
-
+interface PassiveAbility {
+	
 	void OnActivate();
 	void Activate();
-
+	
 	void OnOver();
 	void OnRemove();
-
+	
 	//Collision
 	void OnCollisionEnter(Collision hit);
 	void OnCollisionExit(Collision hit);
-
+	
 	//Triggers
 	void OnTriggerEnter(Collider hit);
 	void OnTriggerExit(Collider hit);
 }
 
+
 /*
  * 
  * 
- * An example of the Ability interface
+ * An example of the PassiveAbility interface
  * 
  * 
 using UnityEngine;
 using System.Collections;
 
-public class Example : Ability {
+public class Example : PassiveAbility {
 	public string name = "Example";
 	public string discription = "Example Type";
 	
@@ -71,5 +72,4 @@ public class Example : Ability {
 	public void OnRemove(){
 		
 	}
-}
-*/
+}*/
