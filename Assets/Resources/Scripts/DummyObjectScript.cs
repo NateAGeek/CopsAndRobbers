@@ -51,6 +51,10 @@ public class DummyObjectScript : MonoBehaviour {
 			rigidbody.velocity = Vector3.up * jumpVelocity;	
 		}
 
+		//(Passive)Abilities
+		foreach(PassiveAbility p in PassiveAbilities){
+			p.Activate();
+		}
 		Abilities[selectedAbility].Activate();
     }
 
@@ -62,17 +66,37 @@ public class DummyObjectScript : MonoBehaviour {
 		if (hit.gameObject.tag == "Level") {
 			onGround = true;		
 		}
+
+		//(Passive)Abilities
+		foreach(PassiveAbility p in PassiveAbilities){
+			p.OnCollisionEnter(hit);
+		}
 		Abilities[selectedAbility].OnCollisionExit(hit);
     }
 
 	void OnCollisionExit(Collision hit) {
+
+		//(Passive)Abilities
+		foreach(PassiveAbility p in PassiveAbilities){
+			p.OnCollisionExit(hit);
+		}
 		Abilities[selectedAbility].OnCollisionExit(hit);
 	}
 
 	void OnTriggerEnter(Collider hit){
+
+		//(Passive)Abilities
+		foreach(PassiveAbility p in PassiveAbilities){
+			p.OnTriggerEnter(hit);
+		}
 		Abilities[selectedAbility].OnTriggerEnter(hit);
 	}
 	void OnTriggerExit(Collider hit){
+
+		//(Passive)Abilities
+		foreach(PassiveAbility p in PassiveAbilities){
+			p.OnTriggerExit(hit);
+		}
 		Abilities[selectedAbility].OnTriggerExit(hit);
 	}
 
