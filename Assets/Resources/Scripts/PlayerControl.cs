@@ -204,13 +204,6 @@ public class PlayerControl : MonoBehaviour
          //GUI.Label(new Rect(50, 10, 100, 20), points.ToString());
     }
 
-    void OnNetworkInstantiate(NetworkMessageInfo info)
-    {
-        if(info.sender.guid == Network.player.guid){
-            GUIManager.AttachPlayer(this);
-        }
-    }
-
 	void OnCollisionEnter(Collision collision)
 		{
 			
