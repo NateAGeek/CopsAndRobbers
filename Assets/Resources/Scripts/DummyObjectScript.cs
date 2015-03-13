@@ -22,7 +22,7 @@ public class DummyObjectScript : MonoBehaviour {
 	//Abilities are: SlowBeam, GrapHook, Parkour, StunTrap, IRGlasses
 	private Dictionary<string, Ability> Abilities = new Dictionary<string, Ability>();
 	private Dictionary<string, PassiveAbility> PassiveAbilities = new Dictionary<string, PassiveAbility>();
-	private string selectedAbility = "IRGlasses";
+	private string selectedAbility = "SlowBeam";
 
     void Start() {
 		Abilities["SlowBeam"]  = new SlowBeam(gameObject);
@@ -31,7 +31,7 @@ public class DummyObjectScript : MonoBehaviour {
 
 		camera = GetComponentInChildren<Camera>();
 
-		//PassiveAbilities["ParkourPassive"] = new ParkourPassive(gameObject);
+		PassiveAbilities["ParkourPassive"] = new ParkourPassive(gameObject);
 		PassiveAbilities["StunTrapPassive"] = new StunTrapPassive(gameObject);
 
 		Debug.Log ("Abbility: " + selectedAbility);
