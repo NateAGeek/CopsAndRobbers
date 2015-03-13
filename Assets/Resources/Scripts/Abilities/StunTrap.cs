@@ -8,9 +8,11 @@ public class StunTrap : Ability {
 	private bool activated = false;
 	private Object StunTrapObject;
 	private GameObject Entity;
+	private Camera EntityCamera;
 	
 	public StunTrap(GameObject entity){
 		Entity = entity;
+		EntityCamera = Entity.GetComponentInChildren<Camera>();
 	}
 	
 	public void OnActivate(){
@@ -23,7 +25,7 @@ public class StunTrap : Ability {
 			activated = !activated;
 		}
 		if(Input.GetMouseButtonUp(0)){
-			Ray CameraRay = Entity.GetComponentInChildren<Camera>().ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
+			Ray CameraRay = EntityCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
 			RaycastHit hit;
 			if(Physics.Raycast(CameraRay, out hit, 5.0f)){
 				if(hit.collider.tag == "Level"){
@@ -33,7 +35,22 @@ public class StunTrap : Ability {
 			}
 		}
 	}
+
+	public void OnCollisionEnter(Collision entityHit){
+		
+	}
 	
+	public void OnCollisionExit(Collision entityHit){
+		
+	}
+	
+	public void OnTriggerEnter(Collider entityHit){
+		
+	}
+	public void OnTriggerExit(Collider entityHit){
+		
+	}
+
 	public void OnOver(){
 		
 	}

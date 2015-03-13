@@ -27,7 +27,22 @@ public class IRGlasses : Ability {
 			Entity.GetComponentInChildren<PostProcessingIRGlasses>().enabled = glassesOn;
 		}
 	}
+
+	public void OnCollisionEnter(Collision entityHit){
+		
+	}
 	
+	public void OnCollisionExit(Collision entityHit){
+		
+	}
+	
+	public void OnTriggerEnter(Collider entityHit){
+		
+	}
+	public void OnTriggerExit(Collider entityHit){
+		
+	}
+
 	public void OnOver(){
 		
 	}
