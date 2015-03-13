@@ -34,7 +34,7 @@ public class DummyControl : MonoBehaviour
 	private Dictionary<string, Ability> Abilities = new Dictionary<string, Ability>();
 
 	//Abilities are: SlowBeam, GrapHook, Parkour, StunTrap, IRGlasses
-	private string currentAbility = "SlowBeam";
+	private string currentAbility = "IRGlasses";
 
 
 	//Slowbeam Vars
@@ -60,6 +60,8 @@ public class DummyControl : MonoBehaviour
 
     void Start() {
 		Abilities["SlowBeam"] = new SlowBeam(gameObject);
+		Abilities["StunTrap"] = new StunTrap(gameObject);
+		Abilities["IRGlasses"] = new IRGlasses(gameObject);
 
 		//currentAbility = ab[Random.Range(0, 3)];
 		Debug.Log ("Abbility:"+currentAbility);
@@ -100,27 +102,12 @@ public class DummyControl : MonoBehaviour
 			transform.localScale += new Vector3(0.0f, 0.25f, 0.0f);
 		}
 
-		if(Input.GetMouseButtonUp (0) && currentAbility == "IRGlasses"){
-			cam.GetComponent<PostProcessingIRGlasses>().enabled = !cam.GetComponent<PostProcessingIRGlasses>().enabled;
-		}
-
 		if (isStunned) {
 			StunnedTimer += Time.deltaTime;
 		}
 
 		if (isParkout) {
 			ParkcourTimer += Time.deltaTime;
-		}
-
-		if (Input.GetMouseButtonDown (0) && currentAbility == "StunTrap") {
-			Ray CameraRay = cam.camera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
-			RaycastHit hit;
-			if(Physics.Raycast(CameraRay, out hit) && hit.distance < 5.0f){
-				if(hit.collider.tag == "Level"){
-					Instantiate(Resources.Load("Prefabs/StunTrap"), hit.point, hit.transform.rotation);
-				}
-			}
-
 		}
 
 		if (Input.GetMouseButtonDown(0) && currentAbility == "GrapHook") {
@@ -136,9 +123,6 @@ public class DummyControl : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp (0) && currentAbility == "GrapHook") {
 			rigidbody.useGravity = true;		
-		}
-		if(Input.GetMouseButtonDown(0) && currentAbility == "SlowBeam"){
-			charging = true;
 		}
 		Abilities[currentAbility].Activate();
     }

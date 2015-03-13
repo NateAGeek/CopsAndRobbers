@@ -36,7 +36,7 @@ public class SlowBeam : Ability {
 		if(Input.GetMouseButtonUp(0) && chargeTimer >= chargeTime){
 			chargeTimer = 0.0f;
 			charging = false;
-			SlowBeamObject = Object.Instantiate(Resources.Load("Prefabs/SlowBeam"), Entity.GetComponentInChildren<Camera>().ViewportToScreenPointnew(new Vector3(0.0f, 0.0f, 0.0f)), Quaternion.identity);
+			SlowBeamObject = Object.Instantiate(Resources.Load("Prefabs/SlowBeam"), Entity.GetComponentInChildren<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f)), Entity.transform.rotation);
 			Debug.Log ("Boom, shot Slow Beam");
 		}
 		else if(Input.GetMouseButtonUp(0)){
