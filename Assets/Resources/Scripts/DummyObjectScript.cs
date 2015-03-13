@@ -52,7 +52,7 @@ public class DummyObjectScript : MonoBehaviour {
 		}
 
 		//(Passive)Abilities
-		foreach(PassiveAbility p in PassiveAbilities){
+		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.Activate();
 		}
 		Abilities[selectedAbility].Activate();
@@ -68,7 +68,7 @@ public class DummyObjectScript : MonoBehaviour {
 		}
 
 		//(Passive)Abilities
-		foreach(PassiveAbility p in PassiveAbilities){
+		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.OnCollisionEnter(hit);
 		}
 		Abilities[selectedAbility].OnCollisionExit(hit);
@@ -77,7 +77,7 @@ public class DummyObjectScript : MonoBehaviour {
 	void OnCollisionExit(Collision hit) {
 
 		//(Passive)Abilities
-		foreach(PassiveAbility p in PassiveAbilities){
+		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.OnCollisionExit(hit);
 		}
 		Abilities[selectedAbility].OnCollisionExit(hit);
@@ -86,7 +86,7 @@ public class DummyObjectScript : MonoBehaviour {
 	void OnTriggerEnter(Collider hit){
 
 		//(Passive)Abilities
-		foreach(PassiveAbility p in PassiveAbilities){
+		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.OnTriggerEnter(hit);
 		}
 		Abilities[selectedAbility].OnTriggerEnter(hit);
@@ -94,7 +94,7 @@ public class DummyObjectScript : MonoBehaviour {
 	void OnTriggerExit(Collider hit){
 
 		//(Passive)Abilities
-		foreach(PassiveAbility p in PassiveAbilities){
+		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.OnTriggerExit(hit);
 		}
 		Abilities[selectedAbility].OnTriggerExit(hit);

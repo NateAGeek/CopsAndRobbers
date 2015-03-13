@@ -33,10 +33,14 @@ public class Parkour : PassiveAbility {
 	}
 	
 	public void OnTriggerEnter(Collider entityHit){
-		
+		if (entityHit.tag == "Parkour_Surface") {
+			Entity.rigidbody.useGravity = false;		
+		}
 	}
 	public void OnTriggerExit(Collider entityHit){
-		
+		if (entityHit.tag == "Parkour_Surface") {
+			Entity.rigidbody.useGravity = true;		
+		}
 	}
 	
 	public void OnOver(){
