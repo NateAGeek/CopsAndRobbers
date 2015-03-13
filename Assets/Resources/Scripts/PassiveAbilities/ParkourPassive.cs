@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Parkour : PassiveAbility {
+public class ParkourPassive : PassiveAbility {
 	public string name = "Parkour";
 	public string discription = "Allows the player to use the Parkour ";
 	
 	private bool activated = false;
 	private GameObject Entity;
 	
-	public Parkour(GameObject entity){
+	public ParkourPassive(GameObject entity){
 		Entity = entity;
 	}
 	

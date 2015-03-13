@@ -31,7 +31,8 @@ public class DummyObjectScript : MonoBehaviour {
 
 		camera = GetComponentInChildren<Camera>();
 
-		PassiveAbilities["Parkour"] = new Parkour(gameObject);
+		//PassiveAbilities["ParkourPassive"] = new ParkourPassive(gameObject);
+		PassiveAbilities["StunTrapPassive"] = new StunTrapPassive(gameObject);
 
 		Debug.Log ("Abbility: " + selectedAbility);
     }
