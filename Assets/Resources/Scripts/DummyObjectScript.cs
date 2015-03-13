@@ -5,12 +5,13 @@ using System.Collections.Generic;
 public class DummyObjectScript : MonoBehaviour {
 
 	//Public Prefrancese
-	public Vector2 sensitivity  = new Vector2(1.0f, 1.0f);
-	public float   speed        = 7.0f;
+	public Vector2 sensitivity  = new Vector2(10.0f, 10.0f);
+	public float   speed        = 1.0f;
 	public float   jumpVelocity = 5.0f;
 
 	//Component Vars
 	//	private Rigidbody rigidbody   = GetComponent<Rigidbody>();
+	private Camera camera;
 
 	// Movement Vars
 	private Vector2   rotationMin = new Vector2(-360.0f, -60.0f);
@@ -24,9 +25,13 @@ public class DummyObjectScript : MonoBehaviour {
 	private string selectedAbility = "IRGlasses";
 
     void Start() {
-		Abilities["SlowBeam"] = new SlowBeam(gameObject);
-		Abilities["StunTrap"] = new StunTrap(gameObject);
+		Abilities["SlowBeam"]  = new SlowBeam(gameObject);
+		Abilities["StunTrap"]  = new StunTrap(gameObject);
 		Abilities["IRGlasses"] = new IRGlasses(gameObject);
+
+		camera = GetComponentInChildren<Camera>();
+
+		PassiveAbilities["Parkour"] = new Parkour(gameObject);
 
 		Debug.Log ("Abbility: " + selectedAbility);
     }
@@ -41,14 +46,23 @@ public class DummyObjectScript : MonoBehaviour {
 		transform.localEulerAngles = new Vector3(-rotation.y, rotation.x, 0.0f);
 
 		//Movement Controls
-		Vector3 targetVelocity = new Vector3(Input.GetAxis ("Horizontal"), 0.0f, Input.GetAxis ("Vertical"));
-		targetVelocity = transform.TransformDirection(targetVelocity);
+		if (onGround) {
+			Vector3 targetVelocity = new Vector3 (Input.GetAxis ("Horizontal"), 0.0f, Input.GetAxis ("Vertical"));
+			targetVelocity = transform.TransformDirection (targetVelocity);
+			targetVelocity = new Vector3 (targetVelocity.x * speed, rigidbody.velocity.y, targetVelocity.z * speed);
+			Vector3 velocityChange = targetVelocity - rigidbody.velocity;
 
-		rigidbody.velocity = new Vector3(targetVelocity.x * speed, rigidbody.velocity.y, targetVelocity.z * speed);
+			rigidbody.AddForce (velocityChange, ForceMode.VelocityChange);
+		}
 
+		if(Input.GetKeyDown(KeyCode.LeftControl)){
+			transform.localScale -= new Vector3(0.0f, 0.25f, 0.0f);
+		}
 		if (onGround && Input.GetKeyDown ("space")){
-			onGround = false;
-			rigidbody.velocity = Vector3.up * jumpVelocity;	
+			rigidbody.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
+		}
+		if(Input.GetKeyUp(KeyCode.LeftControl)){
+			transform.localScale += new Vector3(0.0f, 0.25f, 0.0f);
 		}
 
 		//(Passive)Abilities
@@ -63,9 +77,6 @@ public class DummyObjectScript : MonoBehaviour {
 	}
 
     void OnCollisionEnter(Collision hit) {
-		if (hit.gameObject.tag == "Level") {
-			onGround = true;		
-		}
 
 		//(Passive)Abilities
 		foreach(PassiveAbility p in PassiveAbilities.Values){
@@ -74,8 +85,17 @@ public class DummyObjectScript : MonoBehaviour {
 		Abilities[selectedAbility].OnCollisionExit(hit);
     }
 
-	void OnCollisionExit(Collision hit) {
+	void OnCollisionStay(Collision hit){
+		if (hit.gameObject.tag == "Level") {
+			onGround = true;		
+		}
+	}
 
+	void OnCollisionExit(Collision hit) {
+		if (hit.gameObject.tag == "Level") {
+			onGround = false;		
+		}
+		
 		//(Passive)Abilities
 		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.OnCollisionExit(hit);
@@ -92,7 +112,7 @@ public class DummyObjectScript : MonoBehaviour {
 		Abilities[selectedAbility].OnTriggerEnter(hit);
 	}
 	void OnTriggerExit(Collider hit){
-
+		
 		//(Passive)Abilities
 		foreach(PassiveAbility p in PassiveAbilities.Values){
 			p.OnTriggerExit(hit);
