@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GlobalGameStatusObject : MonoBehaviour {
 	private int points;
@@ -30,4 +30,6 @@ public class GlobalGameStatusObject : MonoBehaviour {
 			isRobber = value;
 		}
 	}
+
+	
 }

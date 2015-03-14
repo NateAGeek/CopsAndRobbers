@@ -7,6 +7,7 @@ public class GUIManager : MonoBehaviour {
 	public GameObject ServerWaitingGUIObj;
 	public GameObject ClientWaitingGUIObj;
 	public GameObject GameHUDGUIObj;
+	public GameObject ScoreboardGUIObj;
 
 	private static GUIManager instance;
 
@@ -31,7 +32,11 @@ public class GUIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetButton("Scoreboard") && stateStack.Peek() == gameHUD){
+			ScoreboardGUIObj.SetActive(true);
+		} else if(Input.GetButtonUp("Scoreboard")){
+			ScoreboardGUIObj.SetActive(false);
+		}
 	}
 
 	void OnGUI() {
