@@ -32,7 +32,7 @@ public class StunTrapPassive : PassiveAbility {
 		}
 		if (stunTimer >= stunTime) {
 			isStunned = false;
-			MonoBehaviour.Destroy(Trap);
+			Object.Destroy(Trap);
 			Entity.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 		}
 	}
