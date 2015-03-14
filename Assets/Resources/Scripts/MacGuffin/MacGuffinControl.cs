@@ -31,7 +31,7 @@ public class MacGuffinControl : MonoBehaviour {
 		if (collision.gameObject.tag == "Robber") {
 			PlayerControl robberControl = collision.gameObject.GetComponent("PlayerControl") as PlayerControl;
 			robberControl.points += 100;
-			Network.Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 

@@ -95,10 +95,4 @@ public class GUIManager : MonoBehaviour {
 		instance.drawNewGUI(guiName);
 	}
 
-	public static void AttachPlayer(PlayerControl p)
-	{
-		GameHUD g = (GameHUD)instance.gameHUD;
-		g.attachPlayer(p);
-	}
-
 }

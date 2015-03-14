@@ -5,9 +5,12 @@ public class MainServerCode : MonoBehaviour {
     
     public string ipConnection = "127.0.0.1";
     public int portConnection = 6969;
+    public string uniqueGameName = "CopsAndRobbers";
 	public Transform spawnCops;
 	public Transform spawnRobber;
     public Transform spawnMacGuffin;
+    public GlobalGameStatusObject status;
+    public RoundManager roundManager;
 
     private int selectedSpawnType = 0;
     private string[] options = new string[] { "Spawn Robber", "Spawn Cop" };
@@ -36,9 +39,20 @@ public class MainServerCode : MonoBehaviour {
         Network.Connect(ipConnection, portConnection);
     }
 
-    public void SetServer() {
-        Network.InitializeServer(4, portConnection, true);
+    public void SetServer(string lobbyName) {
+        Network.InitializeServer(4, portConnection, !Network.HavePublicAddress());
+        MasterServer.RegisterHost(uniqueGameName, lobbyName);
         //Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnMacGuffin.position, Quaternion.identity);
+    }
+
+    public void RefreshHostList()
+    {
+        MasterServer.RequestHostList(uniqueGameName);
+    }
+
+    void OnMasterServerEvent(MasterServerEvent msEvent)
+    {
+
     }
 
     void OnGUI() {
@@ -86,8 +100,7 @@ public class MainServerCode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        timerStyle = new GUIStyle();
-        timerStyle.fontSize = 40;
+        MasterServer.ipAddress = "127.0.0.1";
 	}
 	
 	// Update is called once per frame
@@ -100,11 +113,14 @@ public class MainServerCode : MonoBehaviour {
     {
         if(Network.player.guid == robberGuid){
             Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0);
+            status.IsRobber = true;
         } else {
             Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0);
+            status.IsRobber = false;
         }
         roundOn = true;
         Debug.Log("Load Level");
+        roundManager.StartRound();
         GUIManager.SetGUI("GameHUD");
     }
 
