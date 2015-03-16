@@ -14,11 +14,14 @@ public class RoundManager : MonoBehaviour {
 	private bool inProgress;
 	private MainServerCode serverControl;
 	private int robberIndex;
+	private int firstRobberIndex;
 	private List<PlayerState> players;
 	private Transform scoresList;
 	private Transform roundDisplay;
 	private Transform readyList;
 	private Toggle readyCheck;
+	private Text roundInfo;
+	private Text nextRobberName;
 	
 	public int timeLimit;
 	public GameHUD display;
@@ -30,9 +33,11 @@ public class RoundManager : MonoBehaviour {
 		roundDisplay = scoreboard.Find("Round Text");
 		readyList = betweenRoundMenu.Find("Ready List");
 		readyCheck = betweenRoundMenu.Find("Ready Check").gameObject.GetComponent("Toggle") as Toggle;
+		roundInfo = betweenRoundMenu.Find("Round Info").gameObject.GetComponent("Text") as Text;
+		nextRobberName = betweenRoundMenu.Find("Next Robber Info").Find("Next Robber Name").gameObject.GetComponent("Text") as Text;
 		inProgress = false;
 		roundStart = 0;
-		roundNumber = 0;
+		roundNumber = 1;
 		robberIndex = 0;
 		players = new List<PlayerState>();
 	}
@@ -53,7 +58,8 @@ public class RoundManager : MonoBehaviour {
 
 			if(Network.isServer){
 				if(timerVal <= 0){
-					networkView.RPC("EndRound", RPCMode.All);
+					robberIndex = (robberIndex + 1) % players.Count;
+					networkView.RPC("EndRound", RPCMode.All, players[robberIndex].Guid);
 				}
 			}
 		}
@@ -82,7 +88,6 @@ public class RoundManager : MonoBehaviour {
 				playerScore.color = new Color(0.039f, 0.039f, 0.882f);
 			}
 		}
-		roundNumber++;
 		Text roundText = roundDisplay.gameObject.GetComponent("Text") as Text;
 		roundText.text = "Round " + roundNumber;
 		inProgress = true;
@@ -90,7 +95,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	[RPC]
-	public void EndRound()
+	public void EndRound(string guid)
 	{
 		Screen.showCursor = true;
 		inProgress = false;
@@ -104,13 +109,23 @@ public class RoundManager : MonoBehaviour {
 			playerReady.isOn = false;
 		}
 		readyCheck.isOn = false;
+		
+		if(robberIndex == firstRobberIndex){
+			roundInfo.text = "End of Round " + roundNumber;
+			roundNumber++;
+		} else {
+			roundInfo.text = "Round " + roundNumber;
+		}
+		nextRobberName.text = guid;
+
 		Network.Destroy(status.Avatar);
 		GUIManager.SetGUI("BetweenRoundGUI");
 	}
 
 	public void StartGame()
 	{
-		robberIndex = UnityEngine.Random.Range(0, players.Count);
+		robberIndex = UnityEngine.Random.Range(0, Network.connections.Length + 1);
+		firstRobberIndex = robberIndex;
 	}
 
 	public void InitializePlayerList(NetworkPlayer[] p)
@@ -165,6 +180,18 @@ public class RoundManager : MonoBehaviour {
 			if(readyName.text == guid){
 				Toggle playerReady = listing.Find("Ready Display").gameObject.GetComponent("Toggle") as Toggle;
 				playerReady.isOn = ready;
+			}
+		}
+		if(Network.isServer){
+			bool allReady = true;
+			foreach(PlayerState p in players){
+				if(!p.IsReady){
+					allReady = false;
+					break;
+				}
+			}
+			if(allReady){
+				serverControl.StartRound();
 			}
 		}
 	}

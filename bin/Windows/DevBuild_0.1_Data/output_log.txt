@@ -12,12 +12,10 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.068 seconds
+- Completed reload, in  0.186 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
 Initialize engine version: 4.6.1f1 (d1db7a1b5196)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -32,35 +30,29 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.050 seconds
+- Completed reload, in  0.051 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
-Load Level
+Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
+Load LeveL
  
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandaloLePloyar Lenelr
-at
-ed/UnitmEngiC:e/BuildApep Line: 493d
-
-c6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
+oadl naLe:v C:
  
-(Filename:  Line: -1)
+(ildAgent/Filename: C:/Buildb6gen/t/wirfactsd/S6385da9lonePlayifacts/StandalonePlayenrGeneratpedL/nUni49)
+
+ineDebug.cpp Line: 49)
 
 NullReferenceException: Object reference not set to an instance of an object
   at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
  
 (Filename:  Line: -1)
 
-The server has disconnected from the client. Most likely the server has shut down.
+NullReferenceException: Object reference not set to an instance of an object
+  at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
  
-(Filename:  Line: 745)
-
-The server has disconnected from the client. Most likely the server has shut down.
- 
-(Filename:  Line: 745)
+(Filename:  Line: -1)
 

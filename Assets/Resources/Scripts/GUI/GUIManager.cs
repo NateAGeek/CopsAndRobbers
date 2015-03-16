@@ -70,6 +70,9 @@ public class GUIManager : MonoBehaviour {
 	{
 		IGUIState oldGUI;
 		IGUIState newGUI;
+		if(guiName == "GameHUD" && stateStack.Peek() == betweenRound){
+			guiName = "";
+		}
 		switch(guiName){
 			case "":
 				oldGUI = stateStack.Pop();

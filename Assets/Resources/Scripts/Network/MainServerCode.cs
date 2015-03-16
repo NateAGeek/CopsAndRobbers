@@ -143,6 +143,11 @@ public class MainServerCode : MonoBehaviour {
         networkView.RPC("LoadLevel", RPCMode.All, roundManager.GetCurrentRobberGuid());
     }
 
+    public void StartRound()
+    {
+        networkView.RPC("LoadLevel", RPCMode.All, roundManager.GetCurrentRobberGuid());
+    }
+
     public string IPConnection
     {
         get
