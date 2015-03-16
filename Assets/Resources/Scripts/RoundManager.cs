@@ -9,12 +9,15 @@ public class RoundManager : MonoBehaviour {
 	public Transform betweenRoundMenu;
 	public Transform playerListing;
 	public Transform readyListing;
+	public Text playerNameField;
+	public Text serverNameField;
 	private int roundStart;
 	private int roundNumber;
 	private bool inProgress;
 	private MainServerCode serverControl;
 	private int robberIndex;
 	private int firstRobberIndex;
+	private string firstRobberGuid;
 	private List<PlayerState> players;
 	private Transform scoresList;
 	private Transform roundDisplay;
@@ -24,6 +27,7 @@ public class RoundManager : MonoBehaviour {
 	private Text nextRobberName;
 	
 	public int timeLimit;
+	public int roundLimit;
 	public GameHUD display;
 
 	// Use this for initialization
@@ -59,7 +63,7 @@ public class RoundManager : MonoBehaviour {
 			if(Network.isServer){
 				if(timerVal <= 0){
 					robberIndex = (robberIndex + 1) % players.Count;
-					networkView.RPC("EndRound", RPCMode.All, players[robberIndex].Guid);
+					networkView.RPC("EndRound", RPCMode.All, players[robberIndex].Guid, players[robberIndex].Name);
 				}
 			}
 		}
@@ -69,9 +73,11 @@ public class RoundManager : MonoBehaviour {
 	public void StartRound(string robberGuid)
 	{
 		Screen.showCursor = false;
+		string name = "";
 		foreach(PlayerState p in players){
 			if(p.Guid == robberGuid){
 				p.IsRobber = true;
+				name = p.Name;
 			} else {
 				p.IsRobber = false;
 			}
@@ -80,7 +86,7 @@ public class RoundManager : MonoBehaviour {
 			Transform listing = scoresList.GetChild(i);
 			Text playerName = listing.Find("Player Name").gameObject.GetComponent("Text") as Text;
 			Text playerScore = listing.Find("Player Score").gameObject.GetComponent("Text") as Text;
-			if(playerName.text == robberGuid){
+			if(playerName.text == name){
 				playerName.color = new Color(0.0f, 0.0f, 0.0f);
 				playerScore.color = new Color(0.0f, 0.0f, 0.0f);
 			} else {
@@ -95,7 +101,7 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	[RPC]
-	public void EndRound(string guid)
+	public void EndRound(string guid, string name)
 	{
 		Screen.showCursor = true;
 		inProgress = false;
@@ -110,30 +116,107 @@ public class RoundManager : MonoBehaviour {
 		}
 		readyCheck.isOn = false;
 		
-		if(robberIndex == firstRobberIndex){
+		if(guid == firstRobberGuid){
 			roundInfo.text = "End of Round " + roundNumber;
 			roundNumber++;
 		} else {
 			roundInfo.text = "Round " + roundNumber;
 		}
-		nextRobberName.text = guid;
+		nextRobberName.text = name;
 
 		Network.Destroy(status.Avatar);
-		GUIManager.SetGUI("BetweenRoundGUI");
+		if(roundNumber <= 4){
+			GUIManager.SetGUI("BetweenRoundGUI");
+		} else {
+			EndGame();
+		}
 	}
 
 	public void StartGame()
 	{
-		robberIndex = UnityEngine.Random.Range(0, Network.connections.Length + 1);
-		firstRobberIndex = robberIndex;
+		Debug.Log("Start Game");
+		InitializePlayerList();
 	}
 
-	public void InitializePlayerList(NetworkPlayer[] p)
+	[RPC]
+	public void SetFirstRobber(string guid)
 	{
-		for(int i = 0; i < p.Length; i++){
-            networkView.RPC("InitializePlayer", RPCMode.All, p[i].guid);
-        }
-        networkView.RPC("InitializePlayer", RPCMode.All, Network.player.guid);
+		firstRobberGuid = guid;
+	}
+
+	public void EndGame()
+	{
+		inProgress = false;
+		string winner = GetLeader();
+		for(int i = 0; i < scoresList.childCount; i++){
+			Transform listing = scoresList.GetChild(i);
+			Text playerName = listing.Find("Player Name").gameObject.GetComponent("Text") as Text;
+			Text playerScore = listing.Find("Player Score").gameObject.GetComponent("Text") as Text;
+			if(playerName.text == winner){
+				playerName.color = new Color(1.0f, 0.843f, 0.0f);
+				playerScore.color = new Color(1.0f, 0.843f, 0.0f);
+			} else {
+				playerName.color = new Color(0.0f, 0.0f, 0.0f);
+				playerScore.color = new Color(0.0f, 0.0f, 0.0f);
+			}
+		}
+		Text roundText = roundDisplay.gameObject.GetComponent("Text") as Text;
+		roundText.text = "Round " + roundNumber;
+		GUIManager.EndGame();
+	}
+
+	public string GetLeader()
+	{
+		int maxScore = 0;
+		string leader = "";
+		foreach(PlayerState p in players){
+			if (p.Points >= maxScore){
+				maxScore = p.Points;
+				leader = p.Guid;
+			}
+		}
+		return leader;
+	}
+
+	public void InitializePlayerList()
+	{
+		networkView.RPC("SendPlayerNameRequest", RPCMode.Others);
+
+		//for(int i = 0; i < p.Length; i++){
+        //    networkView.RPC("InitializePlayer", RPCMode.All, p[i].guid);
+        //}
+        //status.Name = serverNameField.text;
+        //networkView.RPC("InitializePlayer", RPCMode.All, Network.player.guid, serverNameField.text);
+	}
+
+	[RPC]
+	public void SendPlayerNameRequest()
+	{
+		status.Name = playerNameField.text;
+		networkView.RPC("SendPlayerName", RPCMode.Server, playerNameField.text);
+	}
+
+	[RPC]
+	public void SendPlayerName(string name, NetworkMessageInfo info)
+	{
+		//networkView.RPC("InitializePlayer", RPCMode.All, info.sender.guid, name);
+		Debug.Log("SendPlayerName");
+		Debug.Log("Player Count: " + players.Count);
+		Debug.Log("Network connection count: " + Network.connections.Length);
+		InitializePlayer(info.sender.guid, name);
+		if(players.Count >= Network.connections.Length){
+			foreach(PlayerState p in players){
+				networkView.RPC("InitializePlayer", RPCMode.Others, p.Guid, p.Name);
+			}
+			status.Name = serverNameField.text;
+			InitializePlayer(Network.player.guid, serverNameField.text);
+        	networkView.RPC("InitializePlayer", RPCMode.Others, Network.player.guid, serverNameField.text);
+        	robberIndex = UnityEngine.Random.Range(0, Network.connections.Length + 1);
+			firstRobberIndex = robberIndex;
+			networkView.RPC("SetFirstRobber", RPCMode.All, players[firstRobberIndex].Guid);
+			GUIManager.StartGame();
+			serverControl.StartRound();
+		}
 	}
 
 	public string GetCurrentRobberGuid()
@@ -142,21 +225,23 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	[RPC]
-	public void InitializePlayer(string guid)
+	public void InitializePlayer(string guid, string name)
 	{
 		PlayerState newPlayer = new PlayerState();
 		newPlayer.Guid = guid;
+		newPlayer.Name = name;
 		players.Add(newPlayer);
 		Transform newListing = Instantiate(playerListing, Vector3.zero, Quaternion.identity) as Transform;
 		newListing.SetParent(scoresList, false);
 		Text playerName = newListing.Find("Player Name").gameObject.GetComponent("Text") as Text;
 		Text playerScore = newListing.Find("Player Score").gameObject.GetComponent("Text") as Text;
-		playerName.text = newPlayer.Guid;
+		//playerName.text = newPlayer.Name;
+		playerName.text = newPlayer.Name;
 		playerScore.text = newPlayer.Points.ToString();
 		Transform newReadyListing = Instantiate(readyListing, Vector3.zero, Quaternion.identity) as Transform;
 		newReadyListing.SetParent(readyList, false);
 		Text readyName = newReadyListing.Find("Ready Name").gameObject.GetComponent("Text") as Text;
-		readyName.text = newPlayer.Guid;
+		readyName.text = newPlayer.Name;
 	}
 
 	public void SetReady(bool ready)
@@ -168,8 +253,10 @@ public class RoundManager : MonoBehaviour {
 	[RPC]
 	public void SetPlayerReady(string guid, bool ready)
 	{
+		string name = "";
 		foreach(PlayerState p in players){
 			if(p.Guid == guid){
+				name = p.Name;
 				p.IsReady = ready;
 			}
 		}
@@ -177,7 +264,7 @@ public class RoundManager : MonoBehaviour {
 			Transform listing = readyList.GetChild(i);
 			Text readyName = listing.Find("Ready Name").gameObject.GetComponent("Text") as Text;
 			
-			if(readyName.text == guid){
+			if(readyName.text == name){
 				Toggle playerReady = listing.Find("Ready Display").gameObject.GetComponent("Toggle") as Toggle;
 				playerReady.isOn = ready;
 			}

@@ -6,6 +6,7 @@ public class GlobalGameStatusObject : MonoBehaviour {
 	private bool isRobber;
 	private bool betweenRoundReady;
 	private GameObject playerAvatar;
+	private string name;
 
 	void Start()
 	{
@@ -50,6 +51,16 @@ public class GlobalGameStatusObject : MonoBehaviour {
 
 		set {
 			playerAvatar = value;
+		}
+	}
+
+	public string Name {
+		get {
+			return name;
+		}
+
+		set {
+			name = value;
 		}
 	}
 }

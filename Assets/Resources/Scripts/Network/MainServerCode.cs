@@ -40,6 +40,17 @@ public class MainServerCode : MonoBehaviour {
         Network.Connect(h);
     }
 
+    public void DisconnectFromServer()
+    {
+        Network.Disconnect();
+    }
+
+    public void DisconnectServer()
+    {
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
+    }
+
     public void SetServer(string lobbyName) {
         Network.InitializeServer(4, portConnection, !Network.HavePublicAddress());
         MasterServer.RegisterHost(uniqueGameName, lobbyName);
@@ -108,7 +119,7 @@ public class MainServerCode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        MasterServer.ipAddress = "127.0.0.1";
+        //MasterServer.ipAddress = "127.0.0.1";
 	}
 	
 	// Update is called once per frame
@@ -138,8 +149,14 @@ public class MainServerCode : MonoBehaviour {
         for(int i = 0; i < spawnObjects.Length; i++){
             Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnObjects[i].transform.position, Quaternion.identity, 0);
         }
-        roundManager.InitializePlayerList(Network.connections);
+
+        //roundManager.InitializePlayerList(Network.connections);
         roundManager.StartGame();
+        
+    }
+
+    public void LoadFirstLevel()
+    {
         networkView.RPC("LoadLevel", RPCMode.All, roundManager.GetCurrentRobberGuid());
     }
 

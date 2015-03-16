@@ -31,12 +31,25 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 
 	public void onActive()
 	{
+		clearLobbyList();
 		gameObject.SetActive(true);
 	}
 
 	public void onDeactive()
 	{
 		gameObject.SetActive(false);
+	}
+
+	public void clearLobbyList()
+	{
+		int lobbyCount = lobbyList.childCount;
+		List<Transform> lobbyBtnList = new List<Transform>();
+		for(int i = 0; i < lobbyCount; i++){
+			lobbyBtnList.Add(lobbyList.GetChild(i));
+		}
+		foreach(Transform t in lobbyBtnList){
+			Destroy(t.gameObject);
+		}
 	}
 
 	public void ConnectToServerBtnClicked()
@@ -61,14 +74,7 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 		
 		GUIManager.SetGUI("ClientWaitingForStart");
 		*/
-		int lobbyCount = lobbyList.childCount;
-		List<Transform> lobbyBtnList = new List<Transform>();
-		for(int i = 0; i < lobbyCount; i++){
-			lobbyBtnList.Add(lobbyList.GetChild(i));
-		}
-		foreach(Transform t in lobbyBtnList){
-			Destroy(t.gameObject);
-		}
+		clearLobbyList();
 
 		serverControl.RefreshHostList();
 		HostData[] hostList = serverControl.GetHostList();

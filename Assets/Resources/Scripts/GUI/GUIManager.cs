@@ -9,6 +9,7 @@ public class GUIManager : MonoBehaviour {
 	public GameObject GameHUDGUIObj;
 	public GameObject ScoreboardGUIObj;
 	public GameObject BetweenRoundGUIObj;
+	public GameObject GameOverGUIObj;
 
 	private static GUIManager instance;
 
@@ -19,10 +20,12 @@ public class GUIManager : MonoBehaviour {
 	private IGUIState betweenRound;
 
 	private Stack<IGUIState> stateStack;
+	private bool gameOver;
 
 	// Use this for initialization
 	void Start () {
 		instance = this;
+		gameOver = false;
 		findGameGUI = FindGameGUIObj.GetComponent("FindGameGUI") as IGUIState;
 		serverWaiting = ServerWaitingGUIObj.GetComponent("ServerWaitingForStart") as IGUIState;
 		clientWaiting = ClientWaitingGUIObj.GetComponent("ClientWaitingForStart") as IGUIState;
@@ -37,7 +40,7 @@ public class GUIManager : MonoBehaviour {
 	void Update () {
 		if(Input.GetButton("Scoreboard") && stateStack.Peek() == gameHUD){
 			ScoreboardGUIObj.SetActive(true);
-		} else if(Input.GetButtonUp("Scoreboard")){
+		} else if(Input.GetButtonUp("Scoreboard") && !gameOver){
 			ScoreboardGUIObj.SetActive(false);
 		}
 	}
@@ -105,9 +108,38 @@ public class GUIManager : MonoBehaviour {
 		newGUI.onPush();
 	}
 
+	public void startGameGUI()
+	{
+		gameOver = false;
+	}
+
+	public void showFinalScoreboard()
+	{
+		gameOver = true;
+		ScoreboardGUIObj.SetActive(true);
+		GameOverGUIObj.SetActive(true);
+	}
+
+	public void BackToLobbyBtnClicked()
+	{
+		ScoreboardGUIObj.SetActive(false);
+		GameOverGUIObj.SetActive(false);
+		drawNewGUI("");
+	}
+
 	public static void SetGUI(string guiName)
 	{
 		instance.drawNewGUI(guiName);
+	}
+
+	public static void StartGame()
+	{
+		instance.startGameGUI();
+	}
+
+	public static void EndGame()
+	{
+		instance.showFinalScoreboard();
 	}
 
 }
