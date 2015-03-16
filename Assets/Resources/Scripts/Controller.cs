@@ -136,4 +136,12 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	
+	void OnNetworkInstantiate(NetworkMessageInfo info)
+	{
+		if(networkView.isMine){
+			camera.active = true;
+		} else {
+			camera.active = false;
+		}
+	}
 }
