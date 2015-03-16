@@ -17,6 +17,11 @@ public class ServerWaitingForStart : MonoBehaviour, IGUIState {
 		connectionsText.text = "Connections: " + Network.connections.Length.ToString();
 	}
 
+	void OnPlayerDisconnected()
+	{
+		connectionsText.text = "Connections: " + Network.connections.Length.ToString();
+	}
+
 	public void drawGUI()
 	{
 
@@ -47,5 +52,11 @@ public class ServerWaitingForStart : MonoBehaviour, IGUIState {
 	public void StartGameBtnClicked()
 	{
 		serverControl.StartGame();
+	}
+
+	public void LeaveLobbyBtnClicked()
+	{
+		serverControl.DisconnectServer();
+		GUIManager.SetGUI("");
 	}
 }

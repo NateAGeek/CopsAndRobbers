@@ -19,6 +19,7 @@ public class MainServerCode : MonoBehaviour {
     private int timeLimit = 120;
     private int startTime = 0;
     private GUIStyle timerStyle;
+    private HostData[] hostList;
 
     void OnConnectedToServer() {
         /*
@@ -35,8 +36,19 @@ public class MainServerCode : MonoBehaviour {
         */
     }
 
-    public void ConnectToServer() {
-        Network.Connect(ipConnection, portConnection);
+    public void ConnectToServer(HostData h) {
+        Network.Connect(h);
+    }
+
+    public void DisconnectFromServer()
+    {
+        Network.Disconnect();
+    }
+
+    public void DisconnectServer()
+    {
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
     }
 
     public void SetServer(string lobbyName) {
@@ -50,9 +62,16 @@ public class MainServerCode : MonoBehaviour {
         MasterServer.RequestHostList(uniqueGameName);
     }
 
+    public HostData[] GetHostList()
+    {
+        return hostList;
+    }
+
     void OnMasterServerEvent(MasterServerEvent msEvent)
     {
-
+        if(msEvent == MasterServerEvent.HostListReceived){
+            hostList = MasterServer.PollHostList();
+        }
     }
 
     void OnGUI() {
@@ -100,7 +119,7 @@ public class MainServerCode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        MasterServer.ipAddress = "127.0.0.1";
+        //MasterServer.ipAddress = "127.0.0.1";
 	}
 	
 	// Update is called once per frame
@@ -112,15 +131,15 @@ public class MainServerCode : MonoBehaviour {
     public void LoadLevel(string robberGuid)
     {
         if(Network.player.guid == robberGuid){
-            Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0);
+            status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0) as GameObject;
             status.IsRobber = true;
         } else {
-            Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0);
+            status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0) as GameObject;
             status.IsRobber = false;
         }
         roundOn = true;
         Debug.Log("Load Level");
-        roundManager.StartRound();
+        roundManager.StartRound(robberGuid);
         GUIManager.SetGUI("GameHUD");
     }
 
@@ -130,7 +149,20 @@ public class MainServerCode : MonoBehaviour {
         for(int i = 0; i < spawnObjects.Length; i++){
             Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnObjects[i].transform.position, Quaternion.identity, 0);
         }
-        networkView.RPC("LoadLevel", RPCMode.Others, Network.connections[currentRobber].guid);
+
+        //roundManager.InitializePlayerList(Network.connections);
+        roundManager.StartGame();
+        
+    }
+
+    public void LoadFirstLevel()
+    {
+        networkView.RPC("LoadLevel", RPCMode.All, roundManager.GetCurrentRobberGuid());
+    }
+
+    public void StartRound()
+    {
+        networkView.RPC("LoadLevel", RPCMode.All, roundManager.GetCurrentRobberGuid());
     }
 
     public string IPConnection

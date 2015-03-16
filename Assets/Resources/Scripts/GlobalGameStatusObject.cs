@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GlobalGameStatusObject : MonoBehaviour {
 	private int points;
 	private bool isRobber;
+	private bool betweenRoundReady;
+	private GameObject playerAvatar;
+	private string name;
 
 	void Start()
 	{
@@ -28,6 +31,36 @@ public class GlobalGameStatusObject : MonoBehaviour {
 
 		set {
 			isRobber = value;
+		}
+	}
+
+	public bool IsReady {
+		get {
+			return betweenRoundReady;
+		}
+
+		set {
+			betweenRoundReady = value;
+		}
+	}
+
+	public GameObject Avatar {
+		get {
+			return playerAvatar;
+		}
+
+		set {
+			playerAvatar = value;
+		}
+	}
+
+	public string Name {
+		get {
+			return name;
+		}
+
+		set {
+			name = value;
 		}
 	}
 }

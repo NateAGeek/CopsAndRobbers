@@ -59,17 +59,14 @@ public class PlayerControl : MonoBehaviour
 	
 
     void Start() {
-        Screen.showCursor = false;
         if (networkView.isMine)
         {
-            cam.camera.active = true;
+            //cam.camera.active = true;
 			currentAbility = ab[Random.Range(0, 3)];
         }
         else {
-            cam.camera.active = false;
+            //cam.camera.active = false;
         }
-        pointsStyle = new GUIStyle();
-        pointsStyle.fontSize = 40;
     }
 
     void Update()
@@ -226,7 +223,6 @@ public class PlayerControl : MonoBehaviour
 				Debug.Log("Robber Lost!");
 				GUI.Label(new Rect(400, 400, 100, 100), "GAME OVER!");
 			}
-			
 		}
 		
 		void OnCollisionExit(Collision collision) {
@@ -258,5 +254,14 @@ public class PlayerControl : MonoBehaviour
 		}
 	void OnDisconnectedFromServer(NetworkDisconnection info) {
 		Network.Destroy(gameObject);
+	}
+
+	void OnNetworkInstantiate(NetworkMessageInfo info)
+	{
+		if(networkView.isMine){
+			cam.camera.active = true;
+		} else {
+			cam.camera.active = false;
+		}
 	}
 }

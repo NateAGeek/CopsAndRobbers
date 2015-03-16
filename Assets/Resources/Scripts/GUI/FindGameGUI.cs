@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class FindGameGUI : MonoBehaviour, IGUIState {
 	public Text lobbyName;
 	public Button createGameBtn;
+	public Transform lobbyBtnPrefab;
+	public Transform lobbyList;
 	private MainServerCode serverControl;
 
 	void Start()
@@ -29,12 +31,25 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 
 	public void onActive()
 	{
+		clearLobbyList();
 		gameObject.SetActive(true);
 	}
 
 	public void onDeactive()
 	{
 		gameObject.SetActive(false);
+	}
+
+	public void clearLobbyList()
+	{
+		int lobbyCount = lobbyList.childCount;
+		List<Transform> lobbyBtnList = new List<Transform>();
+		for(int i = 0; i < lobbyCount; i++){
+			lobbyBtnList.Add(lobbyList.GetChild(i));
+		}
+		foreach(Transform t in lobbyBtnList){
+			Destroy(t.gameObject);
+		}
 	}
 
 	public void ConnectToServerBtnClicked()
@@ -59,6 +74,21 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 		
 		GUIManager.SetGUI("ClientWaitingForStart");
 		*/
+		clearLobbyList();
+
+		serverControl.RefreshHostList();
+		HostData[] hostList = serverControl.GetHostList();
+		if(hostList != null){
+			for(int i = 0; i < hostList.Length; i++){
+				Transform newBtn = Instantiate(lobbyBtnPrefab, Vector3.zero, Quaternion.identity) as Transform;
+				newBtn.SetParent(lobbyList, false);
+				Text newText = newBtn.GetChild(0).gameObject.GetComponent("Text") as Text;
+				newText.text = hostList[i].gameName;
+				Button b = newBtn.gameObject.GetComponent("Button") as Button;
+				HostData h = hostList[i];
+				b.onClick.AddListener(() => ConnectToLobby(h));
+			}
+		}
 	}
 
 	public void BecomeServerBtnClicked()
@@ -89,5 +119,12 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 		} else {
 			createGameBtn.interactable = true;
 		}
+	}
+
+	public void ConnectToLobby(HostData h)
+	{
+		serverControl.ConnectToServer(h);
+
+		GUIManager.SetGUI("ClientWaitingForStart");
 	}
 }
