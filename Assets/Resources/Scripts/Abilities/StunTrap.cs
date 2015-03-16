@@ -32,7 +32,7 @@ public class StunTrap : Ability {
 				Debug.Log ("WTF m8");
 				if(hit.collider.tag == "Level"){
 					numberStuns++;
-					StunTrapObject = Network.Instantiate(Resources.Load("Prefabs/StunTrap"), new Vector3(hit.point.x, hit.point.y + 0.75f, hit.point.z), Quaternion.identity);
+					StunTrapObject = Network.Instantiate(Resources.Load("Prefabs/StunTrap"), new Vector3(hit.point.x, hit.point.y + 0.75f, hit.point.z), Quaternion.identity, 0);
 					Debug.Log("Boom, Trap Placed");
 				}
 			}
