@@ -22,12 +22,13 @@ public class DummyObjectScript : MonoBehaviour {
 	//Abilities are: SlowBeam, GrapHook, Parkour, StunTrap, IRGlasses
 	private Dictionary<string, Ability> Abilities = new Dictionary<string, Ability>();
 	private Dictionary<string, PassiveAbility> PassiveAbilities = new Dictionary<string, PassiveAbility>();
-	private string selectedAbility = "IRGlasses";
+	private string selectedAbility = "GrapHook";
 
     void Start() {
 		Abilities["SlowBeam"]  = new SlowBeam(gameObject);
 		Abilities["StunTrap"]  = new StunTrap(gameObject);
 		Abilities["IRGlasses"] = new IRGlasses(gameObject);
+		Abilities["GrapHook"] = new GrapGun(gameObject);
 
 		camera = GetComponentInChildren<Camera>();
 
