@@ -134,9 +134,11 @@ public class MainServerCode : MonoBehaviour {
             status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0) as GameObject;
             status.IsRobber = true;
         } else {
-            status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Player"), spawnCops.position, Quaternion.identity, 0) as GameObject;
+            status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Cop"), spawnCops.position, Quaternion.identity, 0) as GameObject;
             status.IsRobber = false;
         }
+        Controller playerController = status.Avatar.gameObject.GetComponent("Controller") as Controller;
+        playerController.selectedAbility = status.Ability;
         roundOn = true;
         Debug.Log("Load Level");
         roundManager.StartRound(robberGuid);

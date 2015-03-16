@@ -5,6 +5,7 @@ using System.Collections;
 public class BetweenRoundGUI : MonoBehaviour, IGUIState {
 	public RoundManager roundManager;
 	public Transform abilitiesMenu;
+	public GlobalGameStatusObject status;
 
 	private string selectedAbility;
 
@@ -50,6 +51,25 @@ public class BetweenRoundGUI : MonoBehaviour, IGUIState {
 
 	public void ReadyBtnChecked(bool ready)
 	{
+		string abilityKey = "";
+		switch(selectedAbility){
+			case "Stun Trap":
+				abilityKey = "StunTrap";
+				break;
+			case "Slow Beam":
+				abilityKey = "SlowBeam";
+				break;
+			case "Infrared Glasses":
+				abilityKey = "IRGlasses";
+				break;
+			case "Grappling Hook":
+				abilityKey = "GrapHook";
+				break;
+			default:
+				selectedAbility = "";
+				break;
+		}
+		status.Ability = abilityKey;
 		roundManager.SetReady(ready);
 	}
 

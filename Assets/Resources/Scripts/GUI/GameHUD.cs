@@ -7,6 +7,7 @@ public class GameHUD : MonoBehaviour, IGUIState {
 	public Text pointsText;
 	public Text timerText;
 	public Text roleText;
+	public Text abilityText;
 	public GlobalGameStatusObject status;
 
 	// Use this for initialization
@@ -31,10 +32,28 @@ public class GameHUD : MonoBehaviour, IGUIState {
 
 	public void onActive()
 	{
+		Controller playerController = status.Avatar.GetComponent("Controller") as Controller;
 		if(status.IsRobber){
 			setRole("Robber");
 		} else {
 			setRole("Cop");
+		}
+		switch(playerController.selectedAbility){
+			case "StunTrap":
+				abilityText.text = "Stun Trap";
+				break;
+			case "SlowBeam":
+				abilityText.text = "Slow Beam";
+				break;
+			case "IRGlasses":
+				abilityText.text = "Infrared Glasses";
+				break;
+			case "GrapHook":
+				abilityText.text = "Grappling Hook";
+				break;
+			default:
+				abilityText.text = "";
+				break;
 		}
 		setPoints(status.Points.ToString());
 		gameObject.SetActive(true);

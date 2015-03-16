@@ -6,6 +6,7 @@ public class GlobalGameStatusObject : MonoBehaviour {
 	private bool isRobber;
 	private bool betweenRoundReady;
 	private GameObject playerAvatar;
+	private string selectedAbility;
 	private string name;
 
 	void Start()
@@ -61,6 +62,16 @@ public class GlobalGameStatusObject : MonoBehaviour {
 
 		set {
 			name = value;
+		}
+	}
+
+	public string Ability {
+		get {
+			return selectedAbility;
+		}
+
+		set {
+			selectedAbility = value;
 		}
 	}
 }
