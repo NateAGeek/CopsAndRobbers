@@ -282,4 +282,17 @@ public class RoundManager : MonoBehaviour {
 			}
 		}
 	}
+
+	public void AwardRobber(int points)
+	{
+		if(status.IsRobber){
+			status.Points += points;
+		}
+
+		foreach(PlayerState p in players){
+			if(p.IsRobber){
+				p.Points += points;
+			}
+		}
+	}
 }
