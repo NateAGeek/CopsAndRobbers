@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour {
 	public float   speed        = 1.0f;
 	public float   jumpVelocity = 5.0f;
 	public string selectedAbility = "GrapHook";
+	public string guid;
 	
 	//Component Vars
 	//	private Rigidbody rigidbody   = GetComponent<Rigidbody>();

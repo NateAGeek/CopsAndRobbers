@@ -6,10 +6,11 @@ public class MacGuffinControl : MonoBehaviour {
 	private int startTime = 0;
 	private bool RobberControl = false;
 	private GUIStyle timerStyle;
+	private RoundManager roundManager;
 
 	// Use this for initialization
 	void Start () {
-	
+		roundManager = GameObject.Find("Round Manager").GetComponent("RoundManager") as RoundManager;
 	}
 	
 	// Update is called once per frame
@@ -29,10 +30,15 @@ public class MacGuffinControl : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag == "Robber") {
-			PlayerControl robberControl = collision.gameObject.GetComponent("PlayerControl") as PlayerControl;
-			robberControl.points += 100;
-			gameObject.SetActive(false);
+			Controller robberControl = collision.gameObject.GetComponent("Controller") as Controller;
+			networkView.RPC("RobberPoints", RPCMode.All);
+			Network.Destroy(gameObject);
 		}
 	}
 
+	[RPC]
+	public void RobberPoints()
+	{
+		roundManager.AwardRobber(100);
+	}
 }

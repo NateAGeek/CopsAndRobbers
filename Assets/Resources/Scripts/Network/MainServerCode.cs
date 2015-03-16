@@ -139,6 +139,7 @@ public class MainServerCode : MonoBehaviour {
         }
         Controller playerController = status.Avatar.gameObject.GetComponent("Controller") as Controller;
         playerController.selectedAbility = status.Ability;
+        playerController.guid = Network.player.guid;
         roundOn = true;
         Debug.Log("Load Level");
         roundManager.StartRound(robberGuid);
