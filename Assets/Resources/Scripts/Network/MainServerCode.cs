@@ -11,6 +11,7 @@ public class MainServerCode : MonoBehaviour {
     public Transform spawnMacGuffin;
     public GlobalGameStatusObject status;
     public RoundManager roundManager;
+    public Transform macGuffinSpawns;
 
     private int selectedSpawnType = 0;
     private string[] options = new string[] { "Spawn Robber", "Spawn Cop" };
