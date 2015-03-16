@@ -30,7 +30,7 @@ public class GrapGun : Ability {
 			RaycastHit hit;
 			if(Physics.Raycast(CameraRay, out hit, 75.0f)){
 				if(hit.collider.tag == "Edge"){
-					GrapHook = Network.Instantiate(Resources.Load("Prefabs/GrapHook"), hit.point, hit.transform.rotation) as GameObject;
+					GrapHook = Network.Instantiate(Resources.Load("Prefabs/GrapHook"), hit.point, hit.transform.rotation, 0) as GameObject;
 					GrapHook.GetComponent<GrapHookObject>().StartPoint = Entity.transform.position;
 					GrapHook.GetComponent<GrapHookObject>().EndPoint = hit.point;
 					//Entity.rigidbody.useGravity = false;

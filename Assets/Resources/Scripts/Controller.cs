@@ -31,9 +31,6 @@ public class Controller : MonoBehaviour {
 			Abilities ["IRGlasses"] = new IRGlasses (gameObject);
 			Abilities ["GrapHook"] = new GrapGun (gameObject);
 		
-			camera = GetComponentInChildren<Camera> ();
-			camera.active = true; 
-		
 			//PassiveAbilities["ParkourPassive"] = new ParkourPassive(gameObject);
 			PassiveAbilities ["StunTrapPassive"] = new StunTrapPassive (gameObject);
 			PassiveAbilities ["SlowBeamPassive"] = new SlowBeamPassive (gameObject);
@@ -52,7 +49,9 @@ public class Controller : MonoBehaviour {
 			
 			transform.localEulerAngles = new Vector3 (0.0f, rotation.x, 0.0f);
 			camera.transform.localEulerAngles = new Vector3 (-rotation.y, 0.0f, 0.0f);
-			
+
+			Debug.Log ("On Ground?"+onGround);
+
 			//Movement Controls
 			if (onGround) {
 					Vector3 targetVelocity = new Vector3 (Input.GetAxis ("Horizontal"), 0.0f, Input.GetAxis ("Vertical"));
@@ -77,7 +76,7 @@ public class Controller : MonoBehaviour {
 			foreach (PassiveAbility p in PassiveAbilities.Values) {
 					p.Activate ();
 			}
-						Abilities [selectedAbility].Activate ();
+			Abilities [selectedAbility].Activate ();
 		}
 	}
 	
@@ -133,6 +132,18 @@ public class Controller : MonoBehaviour {
 					p.OnTriggerExit (hit);
 			}
 			Abilities [selectedAbility].OnTriggerExit (hit);
+		}
+	}
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+		Network.Destroy(gameObject);
+	}
+	
+	void OnNetworkInstantiate(NetworkMessageInfo info) {
+		camera = GetComponentInChildren<Camera> ();
+		if(networkView.isMine){
+			camera.active = true;
+		} else {
+			camera.active = false;
 		}
 	}
 	
