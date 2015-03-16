@@ -132,12 +132,13 @@ public class MainServerCode : MonoBehaviour {
     [RPC]
     public void LoadLevel(string robberGuid)
     {
-    	for(int i = 0; i < macGuffinSpawns.childCount; i++){
-    		Transform spawn = macGuffinSpawns.GetChild(i);
-    		Transform newMac = Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawn.position, Quaternion.identity, 0) as Transform;
-    		newMac.SetParent(macGuffinParent, true);
+    	if(Network.isServer){
+	    	for(int i = 0; i < macGuffinSpawns.childCount; i++){
+	    		Transform spawn = macGuffinSpawns.GetChild(i);
+	    		Transform newMac = Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawn.position, Quaternion.identity, 0) as Transform;
+	    		newMac.SetParent(macGuffinParent, true);
+	    	}
     	}
-    	
         if(Network.player.guid == robberGuid){
             status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0) as GameObject;
             status.IsRobber = true;
