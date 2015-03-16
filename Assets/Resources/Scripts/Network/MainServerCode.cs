@@ -135,8 +135,8 @@ public class MainServerCode : MonoBehaviour {
     	if(Network.isServer){
 	    	for(int i = 0; i < macGuffinSpawns.childCount; i++){
 	    		Transform spawn = macGuffinSpawns.GetChild(i);
-	    		Transform newMac = Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawn.position, Quaternion.identity, 0) as Transform;
-	    		newMac.SetParent(macGuffinParent, true);
+	    		GameObject newMac = Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawn.position, Quaternion.identity, 0) as GameObject;
+	    		newMac.transform.SetParent(macGuffinParent, true);
 	    	}
     	}
         if(Network.player.guid == robberGuid){
