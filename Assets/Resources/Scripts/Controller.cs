@@ -31,9 +31,6 @@ public class Controller : MonoBehaviour {
 			Abilities ["IRGlasses"] = new IRGlasses (gameObject);
 			Abilities ["GrapHook"] = new GrapGun (gameObject);
 		
-			camera = GetComponentInChildren<Camera> ();
-			camera.active = true; 
-		
 			//PassiveAbilities["ParkourPassive"] = new ParkourPassive(gameObject);
 			PassiveAbilities ["StunTrapPassive"] = new StunTrapPassive (gameObject);
 			PassiveAbilities ["SlowBeamPassive"] = new SlowBeamPassive (gameObject);
@@ -138,6 +135,7 @@ public class Controller : MonoBehaviour {
 	
 	void OnNetworkInstantiate(NetworkMessageInfo info)
 	{
+		camera = GetComponentInChildren<Camera> ();
 		if(networkView.isMine){
 			camera.active = true;
 		} else {
