@@ -30,7 +30,7 @@ public class GrapGun : Ability {
 			RaycastHit hit;
 			if(Physics.Raycast(CameraRay, out hit, 75.0f)){
 				if(hit.collider.tag == "Edge"){
-					GrapHook = Object.Instantiate(Resources.Load("Prefabs/GrapHook"), hit.point, hit.transform.rotation) as GameObject;
+					GrapHook = Network.Instantiate(Resources.Load("Prefabs/GrapHook"), hit.point, hit.transform.rotation) as GameObject;
 					GrapHook.GetComponent<GrapHookObject>().StartPoint = Entity.transform.position;
 					GrapHook.GetComponent<GrapHookObject>().EndPoint = hit.point;
 					//Entity.rigidbody.useGravity = false;
@@ -46,7 +46,7 @@ public class GrapGun : Ability {
 		if (entityHit.collider.tag == "Level") {
 			Entity.rigidbody.useGravity = true;
 			Entity.rigidbody.velocity = Vector3.zero;
-			Object.Destroy(GrapHook);
+			Network.Destroy(GrapHook);
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class GrapGun : Ability {
 		if (entityHit.tag == "Edge") {
 			Entity.rigidbody.useGravity = true;
 			Entity.rigidbody.velocity = Vector3.zero;
-			Object.Destroy(GrapHook);
+			Network.Destroy(GrapHook);
 		}
 	}
 	public void OnTriggerExit(Collider entityHit){
