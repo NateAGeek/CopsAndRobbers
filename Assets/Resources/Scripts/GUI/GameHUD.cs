@@ -7,18 +7,11 @@ public class GameHUD : MonoBehaviour, IGUIState {
 	public Text pointsText;
 	public Text timerText;
 	public Text roleText;
-
-
-	private int points;
-	private int roundTime;
-	private int timeLimit;
-	private PlayerControl player;
+	public GlobalGameStatusObject status;
 
 	// Use this for initialization
 	void Start () {
-		points = 0;
-		roundTime = 0;
-		timeLimit = 180;
+		
 	}
 	
 	public void drawGUI()
@@ -38,11 +31,12 @@ public class GameHUD : MonoBehaviour, IGUIState {
 
 	public void onActive()
 	{
-		if(player.isRobber){
-			roleText.text = "Robber";
+		if(status.IsRobber){
+			setRole("Robber");
 		} else {
-			roleText.text = "Cop";
+			setRole("Cop");
 		}
+		setPoints(status.Points.ToString());
 		gameObject.SetActive(true);
 	}
 
@@ -51,9 +45,18 @@ public class GameHUD : MonoBehaviour, IGUIState {
 		gameObject.SetActive(false);
 	}
 
-	public void attachPlayer(PlayerControl p)
+	public void setPoints(string p)
 	{
-		player = p;
+		pointsText.text = p;
 	}
 
+	public void setTimer(string t)
+	{
+		timerText.text = t;
+	}
+
+	public void setRole(string r)
+	{
+		roleText.text = r;
+	}
 }

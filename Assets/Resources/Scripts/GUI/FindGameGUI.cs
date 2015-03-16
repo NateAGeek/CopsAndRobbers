@@ -3,10 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class FindGameGUI : MonoBehaviour, IGUIState {
-	public Text ipAddress;
-	public Text portConn;
-	public Text defaultIP;
-	public Text defaultPort;
+	public Text lobbyName;
+	public Button createGameBtn;
 	private MainServerCode serverControl;
 
 	void Start()
@@ -41,7 +39,7 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 
 	public void ConnectToServerBtnClicked()
 	{
-		
+		/*
 		string ip;
 		int port;
 		if(ipAddress.text.Length > 0){
@@ -60,10 +58,12 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 		serverControl.ConnectToServer();
 		
 		GUIManager.SetGUI("ClientWaitingForStart");
+		*/
 	}
 
 	public void BecomeServerBtnClicked()
 	{
+		/*
 		int port;
 		if(portConn.text.Length > 0){
 			int.TryParse(portConn.text, out port);
@@ -75,5 +75,19 @@ public class FindGameGUI : MonoBehaviour, IGUIState {
 		serverControl.SetServer();
 
 		GUIManager.SetGUI("ServerWaitingForStart");
+		*/
+		serverControl.SetServer(lobbyName.text);
+
+		GUIManager.SetGUI("ServerWaitingForStart");
+		
+	}
+
+	public void LobbyNameOnChange(string lobby)
+	{
+		if(lobby.Length <= 0){
+			createGameBtn.interactable = false;
+		} else {
+			createGameBtn.interactable = true;
+		}
 	}
 }
