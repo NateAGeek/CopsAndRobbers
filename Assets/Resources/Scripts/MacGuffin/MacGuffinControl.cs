@@ -10,7 +10,7 @@ public class MacGuffinControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		roundManager = GameObject.Find("Round Manager").GetComponent("RoundManager") as RoundManager;
+		roundManager = GameObject.Find("RoundManager").GetComponent("RoundManager") as RoundManager;
 	}
 	
 	// Update is called once per frame
