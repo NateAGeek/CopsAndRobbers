@@ -86,7 +86,9 @@ public class Controller : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision hit) {
-		
+		if (hit.collider.tag == "Robber") {
+			Debug.Log ("Robber lost gg");		
+		}
 		if (networkView.isMine) {
 			foreach (PassiveAbility p in PassiveAbilities.Values) {
 					p.OnCollisionEnter (hit);
