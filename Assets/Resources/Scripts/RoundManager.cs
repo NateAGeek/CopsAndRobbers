@@ -8,6 +8,7 @@ public class RoundManager : MonoBehaviour {
 	public Transform scoreboard;
 	public Transform playerListing;
 	private int roundStart;
+	private int roundNumber;
 	private bool inProgress;
 	private MainServerCode serverControl;
 	private int robberIndex;
@@ -25,6 +26,7 @@ public class RoundManager : MonoBehaviour {
 		roundDisplay = scoreboard.Find("Round Text");
 		inProgress = false;
 		roundStart = 0;
+		roundNumber = 0;
 		robberIndex = 0;
 		players = new List<PlayerState>();
 	}
@@ -46,13 +48,32 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	[RPC]
-	public void StartRound()
+	public void StartRound(string robberGuid)
 	{
+		foreach(PlayerState p in players){
+			if(p.Guid == robberGuid){
+				p.IsRobber = true;
+			} else {
+				p.IsRobber = false;
+			}
+		}
+		for(int i = 0; i < scoresList.childCount; i++){
+			Transform listing = scoresList.GetChild(i);
+			Text playerName = listing.Find("Player Name").gameObject.GetComponent("Text") as Text;
+			Text playerScore = listing.Find("Player Score").gameObject.GetComponent("Text") as Text;
+			if(playerName.text == robberGuid){
+				playerName.color = new Color(0.0f, 0.0f, 0.0f);
+				playerScore.color = new Color(0.0f, 0.0f, 0.0f);
+			} else {
+				playerName.color = new Color(0.039f, 0.039f, 0.882f);
+				playerScore.color = new Color(0.039f, 0.039f, 0.882f);
+			}
+		}
+		roundNumber++;
+		Text roundText = roundDisplay.gameObject.GetComponent("Text") as Text;
+		roundText.text = "Round " + roundNumber;
 		inProgress = true;
 		roundStart = (int)Time.time;
-		foreach(PlayerState p in players){
-			Debug.Log(p.Guid);
-		}
 	}
 
 	[RPC]
@@ -69,9 +90,9 @@ public class RoundManager : MonoBehaviour {
 	public void InitializePlayerList(NetworkPlayer[] p)
 	{
 		for(int i = 0; i < p.Length; i++){
-            networkView.RPC("InitializePlayer", RPCMode.All, p[i]);
+            networkView.RPC("InitializePlayer", RPCMode.All, p[i].guid);
         }
-        networkView.RPC("InitializePlayer", RPCMode.All, Network.player);
+        networkView.RPC("InitializePlayer", RPCMode.All, Network.player.guid);
 	}
 
 	public string GetCurrentRobberGuid()
@@ -80,10 +101,10 @@ public class RoundManager : MonoBehaviour {
 	}
 
 	[RPC]
-	public void InitializePlayer(NetworkPlayer p)
+	public void InitializePlayer(string guid)
 	{
 		PlayerState newPlayer = new PlayerState();
-		newPlayer.Guid = p.guid;
+		newPlayer.Guid = guid;
 		players.Add(newPlayer);
 		Transform newListing = Instantiate(playerListing, Vector3.zero, Quaternion.identity) as Transform;
 		newListing.SetParent(scoresList, false);

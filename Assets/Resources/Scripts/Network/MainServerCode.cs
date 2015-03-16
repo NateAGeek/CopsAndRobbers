@@ -108,7 +108,7 @@ public class MainServerCode : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //MasterServer.ipAddress = "127.0.0.1";
+        MasterServer.ipAddress = "127.0.0.1";
 	}
 	
 	// Update is called once per frame
@@ -128,7 +128,7 @@ public class MainServerCode : MonoBehaviour {
         }
         roundOn = true;
         Debug.Log("Load Level");
-        roundManager.StartRound();
+        roundManager.StartRound(robberGuid);
         GUIManager.SetGUI("GameHUD");
     }
 
