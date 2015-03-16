@@ -148,13 +148,4 @@ public class Controller : MonoBehaviour {
 		}
 	}
 	
-	void OnNetworkInstantiate(NetworkMessageInfo info)
-	{
-		camera = GetComponentInChildren<Camera> ();
-		if(networkView.isMine){
-			camera.active = true;
-		} else {
-			camera.active = false;
-		}
-	}
 }
