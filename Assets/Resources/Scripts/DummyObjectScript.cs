@@ -8,6 +8,7 @@ public class DummyObjectScript : MonoBehaviour {
 	public Vector2 sensitivity  = new Vector2(10.0f, 10.0f);
 	public float   speed        = 1.0f;
 	public float   jumpVelocity = 5.0f;
+	private string selectedAbility = "StunTrap";
 
 	//Component Vars
 	//	private Rigidbody rigidbody   = GetComponent<Rigidbody>();
@@ -20,9 +21,8 @@ public class DummyObjectScript : MonoBehaviour {
 	private bool      onGround    = false;
 
 	//Abilities are: SlowBeam, GrapHook, Parkour, StunTrap, IRGlasses
-	private Dictionary<string, Ability> Abilities = new Dictionary<string, Ability>();
-	private Dictionary<string, PassiveAbility> PassiveAbilities = new Dictionary<string, PassiveAbility>();
-	private string selectedAbility = "GrapHook";
+	public Dictionary<string, Ability> Abilities = new Dictionary<string, Ability>();
+	public Dictionary<string, PassiveAbility> PassiveAbilities = new Dictionary<string, PassiveAbility>();
 
     void Start() {
 		Abilities["SlowBeam"]  = new SlowBeam(gameObject);
@@ -34,6 +34,7 @@ public class DummyObjectScript : MonoBehaviour {
 
 		PassiveAbilities["ParkourPassive"] = new ParkourPassive(gameObject);
 		PassiveAbilities["StunTrapPassive"] = new StunTrapPassive(gameObject);
+		PassiveAbilities ["SlowBeamPassive"] = new SlowBeamPassive(gameObject);
 
 		Debug.Log ("Abbility: " + selectedAbility);
     }

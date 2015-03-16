@@ -9,6 +9,7 @@ public class StunTrap : Ability {
 	private Object StunTrapObject;
 	private GameObject Entity;
 	private Camera EntityCamera;
+	public int numberStuns = 0;
 	
 	public StunTrap(GameObject entity){
 		Entity = entity;
@@ -24,12 +25,14 @@ public class StunTrap : Ability {
 			OnActivate();
 			activated = !activated;
 		}
-		if(Input.GetMouseButtonUp(0)){
+		if(Input.GetMouseButtonUp(0) && numberStuns < 5){
 			Ray CameraRay = EntityCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0.0f));
 			RaycastHit hit;
-			if(Physics.Raycast(CameraRay, out hit, 5.0f)){
+			if(Physics.Raycast(CameraRay, out hit, 10.0f)){
+				Debug.Log ("WTF m8");
 				if(hit.collider.tag == "Level"){
-					StunTrapObject = Object.Instantiate(Resources.Load("Prefabs/StunTrap"), hit.point, hit.transform.rotation);
+					numberStuns++;
+					StunTrapObject = Object.Instantiate(Resources.Load("Prefabs/StunTrap"), new Vector3(hit.point.x, hit.point.y + 0.75f, hit.point.z), Quaternion.identity);
 					Debug.Log("Boom, Trap Placed");
 				}
 			}

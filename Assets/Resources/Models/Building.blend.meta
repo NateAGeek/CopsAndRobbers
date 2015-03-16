@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 157a08fd357cb47e898cb975b3317bcf
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Building
+    100004: Cube
+    100006: Cube_001
+    100008: Cube_002
+    100010: Cube_003
+    100012: Cube_004
+    100014: Floors
+    100016: Floors_001
+    100018: Floors_002
+    100020: Floors_003
+    100022: Floors_004
+    100024: Stairs1
+    100026: Stairs3
+    100028: Staries4
+    100030: Staris_2
+    400000: //RootNode
+    400002: Building
+    400004: Cube
+    400006: Cube_001
+    400008: Cube_002
+    400010: Cube_003
+    400012: Cube_004
+    400014: Floors
+    400016: Floors_001
+    400018: Floors_002
+    400020: Floors_003
+    400022: Floors_004
+    400024: Stairs1
+    400026: Stairs3
+    400028: Staries4
+    400030: Staris_2
+    2300000: Building
+    2300002: Cube
+    2300004: Cube_001
+    2300006: Cube_002
+    2300008: Cube_003
+    2300010: Cube_004
+    2300012: Floors
+    2300014: Floors_001
+    2300016: Floors_002
+    2300018: Floors_003
+    2300020: Floors_004
+    2300022: Stairs1
+    2300024: Stairs3
+    2300026: Staries4
+    2300028: Staris_2
+    3300000: Building
+    3300002: Cube
+    3300004: Cube_001
+    3300006: Cube_002
+    3300008: Cube_003
+    3300010: Cube_004
+    3300012: Floors
+    3300014: Floors_001
+    3300016: Floors_002
+    3300018: Floors_003
+    3300020: Floors_004
+    3300022: Stairs1
+    3300024: Stairs3
+    3300026: Staries4
+    3300028: Staris_2
+    4300000: Cube_004
+    4300002: Cube_003
+    4300004: Floors_003
+    4300006: Cube_002
+    4300008: Cube_001
+    4300010: Cube
+    4300012: Floors_002
+    4300014: Floors_001
+    4300016: Floors
+    4300018: Building
+    4300020: Floors_004
+    4300022: Staries4
+    4300024: Stairs3
+    4300026: Staris_2
+    4300028: Stairs1
+    6400000: Building
+    6400002: Cube
+    6400004: Cube_001
+    6400006: Cube_002
+    6400008: Cube_003
+    6400010: Cube_004
+    6400012: Floors
+    6400014: Floors_001
+    6400016: Floors_002
+    6400018: Floors_003
+    6400020: Floors_004
+    6400022: Stairs1
+    6400024: Stairs3
+    6400026: Staries4
+    6400028: Staris_2
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

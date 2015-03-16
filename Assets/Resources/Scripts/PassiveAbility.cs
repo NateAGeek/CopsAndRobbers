@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-interface PassiveAbility {
+public interface PassiveAbility {
 	
 	void OnActivate();
 	void Activate();

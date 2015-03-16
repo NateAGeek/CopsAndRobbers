@@ -1,6 +1,6 @@
 using UnityEngine;
 
-interface Ability {
+public interface Ability {
 
 	void OnActivate();
 	void Activate();
