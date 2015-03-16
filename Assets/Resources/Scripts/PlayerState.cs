@@ -5,6 +5,7 @@ public class PlayerState {
 	private int points;
 	private bool isRobber;
 	private string guid;
+	private bool betweenRoundReady;
 
 	public PlayerState()
 	{
@@ -40,6 +41,16 @@ public class PlayerState {
 
 		set {
 			guid = value;
+		}
+	}
+
+	public bool IsReady {
+		get {
+			return betweenRoundReady;
+		}
+
+		set {
+			betweenRoundReady = value;
 		}
 	}
 }

@@ -6,7 +6,9 @@ using System.Collections.Generic;
 public class RoundManager : MonoBehaviour {
 	public GlobalGameStatusObject status;
 	public Transform scoreboard;
+	public Transform betweenRoundMenu;
 	public Transform playerListing;
+	public Transform readyListing;
 	private int roundStart;
 	private int roundNumber;
 	private bool inProgress;
@@ -15,6 +17,8 @@ public class RoundManager : MonoBehaviour {
 	private List<PlayerState> players;
 	private Transform scoresList;
 	private Transform roundDisplay;
+	private Transform readyList;
+	private Toggle readyCheck;
 	
 	public int timeLimit;
 	public GameHUD display;
@@ -24,6 +28,8 @@ public class RoundManager : MonoBehaviour {
 		serverControl = GameObject.Find("GlobalServerObject").GetComponent("MainServerCode") as MainServerCode;
 		scoresList = scoreboard.Find("Scores List");
 		roundDisplay = scoreboard.Find("Round Text");
+		readyList = betweenRoundMenu.Find("Ready List");
+		readyCheck = betweenRoundMenu.Find("Ready Check").gameObject.GetComponent("Toggle") as Toggle;
 		inProgress = false;
 		roundStart = 0;
 		roundNumber = 0;
@@ -44,12 +50,19 @@ public class RoundManager : MonoBehaviour {
 			int seconds = timerVal % 60;
 			
 			display.setTimer(String.Format("{0:00}:{1:00}", minutes, seconds));
+
+			if(Network.isServer){
+				if(timerVal <= 0){
+					networkView.RPC("EndRound", RPCMode.All);
+				}
+			}
 		}
 	}
 
 	[RPC]
 	public void StartRound(string robberGuid)
 	{
+		Screen.showCursor = false;
 		foreach(PlayerState p in players){
 			if(p.Guid == robberGuid){
 				p.IsRobber = true;
@@ -79,7 +92,20 @@ public class RoundManager : MonoBehaviour {
 	[RPC]
 	public void EndRound()
 	{
+		Screen.showCursor = true;
 		inProgress = false;
+		status.IsReady = false;
+		foreach(PlayerState p in players){
+			p.IsReady = false;
+		}
+		for(int i = 0; i < readyList.childCount; i++){
+			Transform listing = readyList.GetChild(i);
+			Toggle playerReady = listing.Find("Ready Display").gameObject.GetComponent("Toggle") as Toggle;
+			playerReady.isOn = false;
+		}
+		readyCheck.isOn = false;
+		Network.Destroy(status.Avatar);
+		GUIManager.SetGUI("BetweenRoundGUI");
 	}
 
 	public void StartGame()
@@ -112,5 +138,34 @@ public class RoundManager : MonoBehaviour {
 		Text playerScore = newListing.Find("Player Score").gameObject.GetComponent("Text") as Text;
 		playerName.text = newPlayer.Guid;
 		playerScore.text = newPlayer.Points.ToString();
+		Transform newReadyListing = Instantiate(readyListing, Vector3.zero, Quaternion.identity) as Transform;
+		newReadyListing.SetParent(readyList, false);
+		Text readyName = newReadyListing.Find("Ready Name").gameObject.GetComponent("Text") as Text;
+		readyName.text = newPlayer.Guid;
+	}
+
+	public void SetReady(bool ready)
+	{
+		status.IsReady = ready;
+		networkView.RPC("SetPlayerReady", RPCMode.All, Network.player.guid, ready);
+	}
+
+	[RPC]
+	public void SetPlayerReady(string guid, bool ready)
+	{
+		foreach(PlayerState p in players){
+			if(p.Guid == guid){
+				p.IsReady = ready;
+			}
+		}
+		for(int i = 0; i < readyList.childCount; i++){
+			Transform listing = readyList.GetChild(i);
+			Text readyName = listing.Find("Ready Name").gameObject.GetComponent("Text") as Text;
+			
+			if(readyName.text == guid){
+				Toggle playerReady = listing.Find("Ready Display").gameObject.GetComponent("Toggle") as Toggle;
+				playerReady.isOn = ready;
+			}
+		}
 	}
 }

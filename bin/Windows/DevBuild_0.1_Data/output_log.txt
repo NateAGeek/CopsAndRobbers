@@ -12,7 +12,7 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.062 seconds
+- Completed reload, in  0.068 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -32,7 +32,7 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.045 seconds
+- Completed reload, in  0.050 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -40,10 +40,11 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
 Load Level
  
-(Filename: C:/BuiLdAgentadwork/d63
-d
-(filename:90 C:/aBuiladAgentt/walonePoayek/Generated/5190b60/arteifacgts/S Laine: 49)ay
-erGenerated/UnityEngineDebug.cpp Line: 49)
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandaloLePloyar Lenelr
+at
+ed/UnitmEngiC:e/BuildApep Line: 493d
+
+c6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
 NullReferenceException: Object reference not set to an instance of an object
   at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
@@ -55,40 +56,11 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
-The server has disconnected from the client. MosT like eerve rh has dischonnectedd from
-  
-(the nclien t.neM:s 745)
-
-y the server has shut down.
+The server has disconnected from the client. Most likely the server has shut down.
  
 (Filename:  Line: 745)
 
-Couldn't send RPC function '__RPCNetworkDestCoyuld
-
-n
-'t lsend R  C fnunction) 
-
-'_CRouNltdnrktDesestroy'
-
+The server has disconnected from the client. Most likely the server has shut down.
  
-(Ficentme:  Line: 246w3)De
-stroyou'
-
- 
-(Filename:f  Line: 2463PC
-N
-etCouldn't se'
-
- d 
-RFPC fumnct Lin'e: 2463)
-
-rkDestlroyt' 
-
-se
-nd RPC fu:nctioen '__RP
-C
-NetworkDestroy'
-
- 
-(Filename:  Line: 2463)
+(Filename:  Line: 745)
 

@@ -8,6 +8,7 @@ public class GUIManager : MonoBehaviour {
 	public GameObject ClientWaitingGUIObj;
 	public GameObject GameHUDGUIObj;
 	public GameObject ScoreboardGUIObj;
+	public GameObject BetweenRoundGUIObj;
 
 	private static GUIManager instance;
 
@@ -15,6 +16,7 @@ public class GUIManager : MonoBehaviour {
 	private IGUIState serverWaiting;
 	private IGUIState clientWaiting;
 	private IGUIState gameHUD;
+	private IGUIState betweenRound;
 
 	private Stack<IGUIState> stateStack;
 
@@ -25,6 +27,7 @@ public class GUIManager : MonoBehaviour {
 		serverWaiting = ServerWaitingGUIObj.GetComponent("ServerWaitingForStart") as IGUIState;
 		clientWaiting = ClientWaitingGUIObj.GetComponent("ClientWaitingForStart") as IGUIState;
 		gameHUD = GameHUDGUIObj.GetComponent("GameHUD") as IGUIState;
+		betweenRound = BetweenRoundGUIObj.GetComponent("BetweenRoundGUI") as IGUIState;
 		stateStack = new Stack<IGUIState>();
 		stateStack.Push(findGameGUI);
 		stateStack.Peek().onPush();
@@ -85,6 +88,9 @@ public class GUIManager : MonoBehaviour {
 				break;
 			case "GameHUD":
 				newGUI = gameHUD;
+				break;
+			case "BetweenRoundGUI":
+				newGUI = betweenRound;
 				break;
 			default:
 				Debug.Log("GUI Name nonsense");
