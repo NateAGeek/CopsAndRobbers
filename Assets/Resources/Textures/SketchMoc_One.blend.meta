@@ -1,0 +1,375 @@
+fileFormatVersion: 2
+guid: 6fbaa2e946ee6404c967927d62b237ed
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Arm_1_L
+    100002: Arm_1_R
+    100004: Arm_2_L
+    100006: Arm_2_R
+    100008: Armature
+    100010: Bone
+    100012: Bone_001
+    100014: Bone_002
+    100016: Bone_003
+    100018: Bone_004
+    100020: Bone_005
+    100022: Bone_006
+    100024: Bone_007
+    100026: Bone_008
+    100028: Bone_009
+    100030: Bone_011
+    100032: Bone_012
+    100034: Bone_013
+    100036: Bone_014
+    100038: Bone_015
+    100040: Bone_016
+    100042: Bone_017
+    100044: Bone_018
+    100046: Bone_019
+    100048: Bone_020
+    100050: Chest
+    100052: Foot_L
+    100054: Foot_R
+    100056: FullBody
+    100058: Head
+    100060: Leg_1_L
+    100062: Leg_1_R
+    100064: Leg_2_L
+    100066: Leg_2_R
+    100068: Leg_Control_L
+    100070: Leg_Control_R
+    100072: Neck
+    100074: //RootNode
+    100076: Stomach
+    100078: Toe_L
+    100080: Toe_R
+    100082: Wrist_L
+    100084: Wrist_R
+    400000: Arm_1_L
+    400002: Arm_1_R
+    400004: Arm_2_L
+    400006: Arm_2_R
+    400008: Armature
+    400010: Bone
+    400012: Bone_001
+    400014: Bone_002
+    400016: Bone_003
+    400018: Bone_004
+    400020: Bone_005
+    400022: Bone_006
+    400024: Bone_007
+    400026: Bone_008
+    400028: Bone_009
+    400030: Bone_011
+    400032: Bone_012
+    400034: Bone_013
+    400036: Bone_014
+    400038: Bone_015
+    400040: Bone_016
+    400042: Bone_017
+    400044: Bone_018
+    400046: Bone_019
+    400048: Bone_020
+    400050: Chest
+    400052: Foot_L
+    400054: Foot_R
+    400056: FullBody
+    400058: Head
+    400060: Leg_1_L
+    400062: Leg_1_R
+    400064: Leg_2_L
+    400066: Leg_2_R
+    400068: Leg_Control_L
+    400070: Leg_Control_R
+    400072: Neck
+    400074: //RootNode
+    400076: Stomach
+    400078: Toe_L
+    400080: Toe_R
+    400082: Wrist_L
+    400084: Wrist_R
+    4300000: FullBody
+    7400000: Default Take
+    7400002: Walks
+    7400004: Walks0
+    9500000: //RootNode
+    13700000: FullBody
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg_Control_L
+        weight: 1
+      - path: Armature/Leg_Control_L/Foot_L
+        weight: 1
+      - path: Armature/Leg_Control_L/Foot_L/Toe_L
+        weight: 1
+      - path: Armature/Leg_Control_R
+        weight: 1
+      - path: Armature/Leg_Control_R/Foot_R
+        weight: 1
+      - path: Armature/Leg_Control_R/Foot_R/Toe_R
+        weight: 1
+      - path: Armature/Stomach
+        weight: 1
+      - path: Armature/Stomach/Chest
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_011
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_011/Bone_012
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_013
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_013/Bone_014
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_015
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_015/Bone_016
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_017
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_017/Bone_018
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_019
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_019/Bone_020
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone/Bone_001
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_002
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_002/Bone_003
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_004
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_004/Bone_005
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_006
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_006/Bone_007
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_008
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_008/Bone_009
+        weight: 1
+      - path: Armature/Stomach/Chest/Neck
+        weight: 1
+      - path: Armature/Stomach/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Stomach/Leg_1_L
+        weight: 1
+      - path: Armature/Stomach/Leg_1_L/Leg_2_L
+        weight: 1
+      - path: Armature/Stomach/Leg_1_R
+        weight: 1
+      - path: Armature/Stomach/Leg_1_R/Leg_2_R
+        weight: 1
+      - path: FullBody
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Walks
+      takeName: Walks
+      firstFrame: 0
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Leg_Control_L
+        weight: 1
+      - path: Armature/Leg_Control_L/Foot_L
+        weight: 1
+      - path: Armature/Leg_Control_L/Foot_L/Toe_L
+        weight: 1
+      - path: Armature/Leg_Control_R
+        weight: 1
+      - path: Armature/Leg_Control_R/Foot_R
+        weight: 1
+      - path: Armature/Leg_Control_R/Foot_R/Toe_R
+        weight: 1
+      - path: Armature/Stomach
+        weight: 1
+      - path: Armature/Stomach/Chest
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_011
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_011/Bone_012
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_013
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_013/Bone_014
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_015
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_015/Bone_016
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_017
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_017/Bone_018
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_019
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_L/Arm_2_L/Wrist_L/Bone_019/Bone_020
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone/Bone_001
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_002
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_002/Bone_003
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_004
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_004/Bone_005
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_006
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_006/Bone_007
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_008
+        weight: 1
+      - path: Armature/Stomach/Chest/Arm_1_R/Arm_2_R/Wrist_R/Bone_008/Bone_009
+        weight: 1
+      - path: Armature/Stomach/Chest/Neck
+        weight: 1
+      - path: Armature/Stomach/Chest/Neck/Head
+        weight: 1
+      - path: Armature/Stomach/Leg_1_L
+        weight: 1
+      - path: Armature/Stomach/Leg_1_L/Leg_2_L
+        weight: 1
+      - path: Armature/Stomach/Leg_1_R
+        weight: 1
+      - path: Armature/Stomach/Leg_1_R/Leg_2_R
+        weight: 1
+      - path: FullBody
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

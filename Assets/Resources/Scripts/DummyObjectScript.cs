@@ -42,10 +42,11 @@ public class DummyObjectScript : MonoBehaviour {
 		//Do the Calculations for rotation
 		rotation.x += Input.GetAxis ("Mouse X") * sensitivity.x;
 		rotation.y += Input.GetAxis ("Mouse Y") * sensitivity.y;
-		rotation.x = Mathf.Clamp (rotation.x, rotationMin.x, rotationMax.x);
+		rotation.x = rotation.x;
 		rotation.y = Mathf.Clamp (rotation.y, rotationMin.y, rotationMax.y);
 
-		transform.localEulerAngles = new Vector3(-rotation.y, rotation.x, 0.0f);
+		transform.localEulerAngles = new Vector3(0.0f, rotation.x, 0.0f);
+		camera.transform.localEulerAngles = new Vector3(-rotation.y, 0.0f, 0.0f);
 
 		//Movement Controls
 		if (onGround) {
