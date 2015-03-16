@@ -1,28 +1,13 @@
 fileFormatVersion: 2
-guid: dc44d74588314394d9beb30ad462d28d
+guid: a2ba1678799404950af06079e0ccd8ad
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Circle
-    100002: Circle_001
-    100004: //RootNode
-    100006: UnderLightPath
-    400000: Circle
-    400002: Circle_001
-    400004: //RootNode
-    400006: UnderLightPath
-    2300000: Circle
-    2300002: Circle_001
-    2300004: UnderLightPath
-    3300000: Circle
-    3300002: Circle_001
-    3300004: UnderLightPath
-    4300000: UnderLightPath
-    4300002: Circle_001
-    4300004: Circle
-    6400000: Circle
-    6400002: Circle_001
-    6400004: UnderLightPath
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Circle
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -46,7 +31,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

@@ -1,29 +1,24 @@
 fileFormatVersion: 2
-guid: dc44d74588314394d9beb30ad462d28d
+guid: 3c3197f56f4aa4929acaf38ae6007975
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Circle
-    100002: Circle_001
-    100004: //RootNode
-    100006: UnderLightPath
-    400000: Circle
-    400002: Circle_001
-    400004: //RootNode
-    400006: UnderLightPath
+    100000: //RootNode
+    100002: Camera
+    100004: Circle
+    100006: Circle.001
+    100008: Lamp
+    400000: //RootNode
+    400002: Camera
+    400004: Circle
+    400006: Circle.001
+    400008: Lamp
     2300000: Circle
-    2300002: Circle_001
-    2300004: UnderLightPath
+    2300002: Circle.001
     3300000: Circle
-    3300002: Circle_001
-    3300004: UnderLightPath
-    4300000: UnderLightPath
-    4300002: Circle_001
-    4300004: Circle
-    6400000: Circle
-    6400002: Circle_001
-    6400004: UnderLightPath
-    7400000: Default Take
+    3300002: Circle.001
+    4300000: Circle.001
+    4300002: Circle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -44,9 +39,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
