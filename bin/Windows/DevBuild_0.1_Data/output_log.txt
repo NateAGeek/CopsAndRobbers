@@ -12,27 +12,7 @@ Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game St
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.065 seconds
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
-<RI> Initializing input.
-<RI> Input initialized.
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\System.dll (this message is harmless)
-Initialize engine version: 4.6.1f1 (d1db7a1b5196)
-GfxDevice: creating device client; threaded=1
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 870M (ID=0x1199)
-    Vendor:   NVIDIA
-    VRAM:     2977 MB
-Begin MonoManager ReloadAssembly
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading D:\Users\Kevin\Documents\NU Docs\Winter 2015\EECS 395 Game Studio\Cops-and-Robbers\CopsAndRobbers-EECS-395-GameDev\bin\Windows\DevBuild_0.1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.040 seconds
+- Completed reload, in  0.082 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -46,18 +26,9 @@ sendto failed with code -1 for char 9 and length 1464.
 sendto failed with code -1 for char 9 and length 1464.
 sendto failed with code -1 for char 9 and length 1464.
 sendto failed with code -1 for char 9 and length 1464.
-Load LLvel
+Load Level
  
-(F lename: CL/Buvel
-i
-ldAgent/wo C:/BuildArek/d63dfc633df90b860/artifaactfactas/StandalonePlayeerGeneraitedn/Unitybuginep Lin.e: 49)
-
-: 49)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
 NullReferenceException: Object reference not set to an instance of an object
   at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
@@ -66,52 +37,14 @@ NullReferenceException: Object reference not set to an instance of an object
 
 Load Level
  
-(Filename: C:/BuildAgenL/woro/d 63delc6
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PostProcessingScriptOutline.Start () [0x00000] in <filename unknown>:0 
  
-(1Filenaare: C:/BuildAngent/workyer63edfc6ted/Unity/artnifacts/SppandaneoneP 4lay
-e
-rGenerated/UnityEngineDebug.cpp Line: 49)
+(Filename:  Line: -1)
 
-NullllReferenceException: Object referencecnet senot s to an insntance of  ann objcct
-  at PostProccessinScripScrOutliptOitne.Starartt() () [0000x00000] in <fme ulenakenunkn>own>:
- (Fi
-lenaeme:  LiLne:: --1)
-
-
-The server has disconnected from the client. Most likely the server hTs she seuver  has d
+The server has disconnected from the client. Most likely the server has shut down.
  
-(oFnilename:  Line:c745)l
-i
-ent. Most likely the server has shut down.
- 
-(Filename:  LineC 74uldn't se5)
-PC function '__RPCNetworkDestroy'
-
- 
-(Filename:  Line: C4ould
-n
-'t soulend RPC dfRuCc fun tion''___RPCNetwrorkDesotro
-y
-'
-
-
- l
-(Filenamen:  Line:
- 
-24Coul
-d
-n't CeoulRPC n't send RPC functtionDe_stProy'w
-o
-r
-kDesetroy' 
-
- ne: 246
-(Fi)
-
-name:  Line: 2463)
-
-Couldn't send RPC function '__RPCNetworkDestroy'
-
- 
-(Filename:  Line: 2463)
+(Filename:  Line: 745)
 
