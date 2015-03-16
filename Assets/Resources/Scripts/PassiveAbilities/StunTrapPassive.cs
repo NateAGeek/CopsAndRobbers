@@ -32,10 +32,10 @@ public class StunTrapPassive : PassiveAbility {
 		}
 		if (stunTimer >= stunTime) {
 			isStunned = false;
-			Object.Destroy(Trap);
+			Network.Destroy(Trap);
 			Entity.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 			if(Entity.GetComponent<DummyObjectScript>().Abilities.ContainsKey("StunTrap")){
-				StunTrap StunTrapAbili = (StunTrap) Entity.GetComponent<DummyObjectScript>().Abilities["StunTrap"];
+				StunTrap StunTrapAbili = (StunTrap) Entity.GetComponent<Controller>().Abilities["StunTrap"];
 				StunTrapAbili.numberStuns--;
 			}
 			stunTimer = 0.0f;

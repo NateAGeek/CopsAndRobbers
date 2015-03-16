@@ -30,7 +30,7 @@ public class SlowBeamPassive : PassiveAbility {
 		}
 		if (slowTimer >= slowTime) {
 			slow = false;
-			Entity.GetComponentInChildren<DummyObjectScript>().speed += 8.0f;
+			Entity.GetComponentInChildren<Controller>().speed += 8.0f;
 			slowTimer = 0.0f;
 		}
 	}
@@ -45,7 +45,7 @@ public class SlowBeamPassive : PassiveAbility {
 	
 	public void OnTriggerEnter(Collider entityHit){
 		if (entityHit.tag == "SlowBeam") {
-			Entity.GetComponentInChildren<DummyObjectScript>().speed -= 8.0f;
+			Entity.GetComponentInChildren<Controller>().speed -= 8.0f;
 			slow = true;
 		}
 	}
