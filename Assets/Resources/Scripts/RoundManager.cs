@@ -153,6 +153,26 @@ public class RoundManager : MonoBehaviour {
 		firstRobberGuid = guid;
 	}
 
+	public void RobberTagged()
+	{
+		networkView.RPC("RobberTagEndRound", RPCMode.Server);
+	}
+
+	[RPC]
+	public void RobberTagEndRound()
+	{
+		int macCount = macGuffinParent.childCount;
+		List<Transform> macList = new List<Transform>();
+		for(int i = 0; i < macCount; i++){
+			macList.Add(macGuffinParent.GetChild(i));
+		}
+		foreach(Transform t in macList){
+			Network.Destroy(t.gameObject);
+		}
+		robberIndex = (robberIndex + 1) % players.Count;
+		networkView.RPC("EndRound", RPCMode.All, players[robberIndex].Guid, players[robberIndex].Name);
+	}
+
 	public void EndGame()
 	{
 		inProgress = false;

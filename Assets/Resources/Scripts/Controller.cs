@@ -14,6 +14,7 @@ public class Controller : MonoBehaviour {
 	//Component Vars
 	//	private Rigidbody rigidbody   = GetComponent<Rigidbody>();
 	private Camera camera;
+	private RoundManager roundManager;
 	
 	// Movement Vars
 	private Vector2   rotationMin = new Vector2(-360.0f, -60.0f);
@@ -37,6 +38,7 @@ public class Controller : MonoBehaviour {
 			PassiveAbilities ["SlowBeamPassive"] = new SlowBeamPassive (gameObject);
 		
 			Debug.Log ("Abbility: " + selectedAbility);
+			roundManager = GameObject.Find("RoundManager").GetComponent("RoundManager") as RoundManager;
 		}
 	}
 	
@@ -84,10 +86,10 @@ public class Controller : MonoBehaviour {
 	void FixedUpdate() {
 		
 	}
-	
+
 	void OnCollisionEnter(Collision hit) {
 		if (hit.collider.tag == "Robber") {
-			Debug.Log ("Robber lost gg");		
+			roundManager.RobberTagged();
 		}
 		if (networkView.isMine) {
 			foreach (PassiveAbility p in PassiveAbilities.Values) {
