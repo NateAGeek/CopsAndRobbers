@@ -29,6 +29,7 @@ public class RoundManager : MonoBehaviour {
 	public int timeLimit;
 	public int roundLimit;
 	public GameHUD display;
+	public Transform macGuffinParent;
 
 	// Use this for initialization
 	void Start () {
@@ -62,6 +63,14 @@ public class RoundManager : MonoBehaviour {
 
 			if(Network.isServer){
 				if(timerVal <= 0){
+					int macCount = macGuffinParent.childCount;
+					List<Transform> macList = new List<Transform>();
+					for(int i = 0; i < macCount; i++){
+						macList.Add(macGuffinParent.GetChild(i));
+					}
+					foreach(Transform t in macList){
+						Network.Destroy(t.gameObject);
+					}
 					robberIndex = (robberIndex + 1) % players.Count;
 					networkView.RPC("EndRound", RPCMode.All, players[robberIndex].Guid, players[robberIndex].Name);
 				}

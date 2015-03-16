@@ -12,6 +12,7 @@ public class MainServerCode : MonoBehaviour {
     public GlobalGameStatusObject status;
     public RoundManager roundManager;
     public Transform macGuffinSpawns;
+    public Transform macGuffinParent;
 
     private int selectedSpawnType = 0;
     private string[] options = new string[] { "Spawn Robber", "Spawn Cop" };
@@ -131,6 +132,12 @@ public class MainServerCode : MonoBehaviour {
     [RPC]
     public void LoadLevel(string robberGuid)
     {
+    	for(int i = 0; i < macGuffinSpawns.childCount; i++){
+    		Transform spawn = macGuffinSpawns.GetChild(i);
+    		Transform newMac = Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawn.position, Quaternion.identity, 0) as Transform;
+    		newMac.SetParent(macGuffinParent, true);
+    	}
+    	
         if(Network.player.guid == robberGuid){
             status.Avatar = Network.Instantiate(Resources.Load("Prefabs/Robber"), spawnRobber.position, Quaternion.identity, 0) as GameObject;
             status.IsRobber = true;
@@ -149,10 +156,7 @@ public class MainServerCode : MonoBehaviour {
 
     public void StartGame()
     {
-        GameObject[] spawnObjects = GameObject.FindGameObjectsWithTag("MacGuffin");
-        for(int i = 0; i < spawnObjects.Length; i++){
-            Network.Instantiate(Resources.Load("Prefabs/MacGuffin"), spawnObjects[i].transform.position, Quaternion.identity, 0);
-        }
+        
 
         //roundManager.InitializePlayerList(Network.connections);
         roundManager.StartGame();

@@ -147,8 +147,4 @@ public class Controller : MonoBehaviour {
 			camera.active = false;
 		}
 	}
-<<<<<<< HEAD
-=======
-	
->>>>>>> a28297bfa2f5928e465291174ec4e7b2764df3df
 }
